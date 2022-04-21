@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "jsx": "react",
+        "paths": {
+            "@src/*": [
+                "./src/*"
+            ],
+            "@root/*": [
+                "./*"
+            ],
+            "@store/*": [
+                "./src/store/*"
+            ],
+            "@assets/*": [
+                "./src/assets/*"
+            ],
+            "@styles/": [
+                "./src/assets/styles/*"
+            ],
+            "@utilities": [
+                "./src/utilities"
+            ],
+            "@utilities/*": [
+                "./src/utilities/*"
+            ],
+            "@components": [
+                "./src/components"
+            ],
+            "@pages/*": [
+                "./src/pages/*"
+            ]
+        },
+    },
+    "include": [
+        "src/**/*"
+, "node_modules/src"    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
