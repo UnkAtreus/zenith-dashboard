@@ -65,7 +65,7 @@ function Home() {
 						<div className="relative flex h-14 w-14">
 							<img src={Logo} alt="" />
 						</div>
-						<div className="flex items-center text-2xl">ZEMIT</div>
+						<div className="flex items-center text-2xl">ZENITH</div>
 					</div>
 					<div className="flex flex-1 justify-end">
 						<Menu mode="horizontal" defaultSelectedKeys={['dashboard']} className="flex-1 justify-end">
@@ -96,7 +96,7 @@ function Home() {
 								<img src={Logo} alt="" />
 							</div>
 							<div className="flex flex-col">
-								<div className="text-xl">ZEMIT Healthcare</div>
+								<div className="text-xl">ZENITH Healthcare</div>
 								<div className="flex items-center">
 									<UserOutlined />
 									<div className="ml-2 text-base">John Doe</div>
@@ -118,7 +118,7 @@ function Home() {
 
 													<div className="overflow-hidden">
 														<div className="overflow-hidden text-ellipsis whitespace-nowrap">
-															ZEMITRUN - MAY2021
+															ZENITHRUN - MAY2021
 														</div>
 														<div className="text-gray-400">Last updated: 04/06/2022</div>
 													</div>

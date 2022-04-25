@@ -11,8 +11,8 @@ function Login() {
 	console.log(import.meta.env.VITE_USERNAME + ' ' + import.meta.env.VITE_PASSWORD);
 	return (
 		<div className="m-auto max-w-lg p-16">
-			{/* <h1 className="text-center text-2xl">Sign in to ZEMIT</h1> */}
-			<img src={Logo} alt="ZEMIT" className="mx-auto mb-8 w-64" />
+			{/* <h1 className="text-center text-2xl">Sign in to ZENITH</h1> */}
+			<img src={Logo} alt="ZENITH" className="mx-auto mb-8 w-64" />
 			<Form layout="vertical" initialValues={{ remember: true }} onFinish={onFinish} autoComplete="off">
 				<Form.Item
 					label="username"

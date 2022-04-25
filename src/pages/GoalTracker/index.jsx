@@ -124,7 +124,7 @@ function GoalTracker() {
 						<div className="relative flex h-14 w-14">
 							<img src={Logo} alt="" />
 						</div>
-						<div className="flex items-center text-2xl">ZEMIT</div>
+						<div className="flex items-center text-2xl">ZENITH</div>
 					</div>
 					<div className="flex flex-1 justify-end">
 						<Menu mode="horizontal" defaultSelectedKeys={['goal-tracker']} className="flex-1 justify-end">
