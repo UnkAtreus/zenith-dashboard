@@ -1,55 +1,158 @@
 import react, { useEffect, useState } from 'react';
-import { Button, Input, Layout, Tag } from 'antd';
+import { Button, Input, Layout, Tag, Menu, Divider } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { Line } from '@ant-design/charts';
+import { Pie } from '@ant-design/charts';
+import { UserOutlined, CalendarOutlined, TeamOutlined } from '@ant-design/icons';
+import Logo from '@/assets/images/mihalik-group-logo.png';
+import { Link } from 'react-router-dom';
 
 function Home() {
 	const data = [
-		{ year: '1991', value: 3 },
-		{ year: '1992', value: 4 },
-		{ year: '1993', value: 3.5 },
-		{ year: '1994', value: 5 },
-		{ year: '1995', value: 4.9 },
-		{ year: '1996', value: 6 },
-		{ year: '1997', value: 7 },
-		{ year: '1998', value: 9 },
-		{ year: '1999', value: 13 }
+		{
+			type: 'ABC',
+			value: 27
+		},
+		{
+			type: 'ACB',
+			value: 25
+		},
+		{
+			type: 'BAC',
+			value: 18
+		},
+		{
+			type: 'BCA',
+			value: 15
+		},
+		{
+			type: 'CBA',
+			value: 10
+		},
+		{
+			type: 'CAB',
+			value: 5
+		}
 	];
 
 	const config = {
+		appendPadding: 10,
 		data,
-		xField: 'year',
-		yField: 'value',
-		point: {
-			size: 5,
-			shape: 'diamond'
-		}
+		angleField: 'value',
+		colorField: 'type',
+		radius: 0.9,
+		label: {
+			type: 'inner',
+			offset: '-30%',
+			content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
+			style: {
+				fontSize: 14,
+				textAlign: 'center'
+			}
+		},
+		interactions: [
+			{
+				type: 'element-active'
+			}
+		]
 	};
-
-	const Pin = () => (
-		<svg
-			viewBox="0 0 16 16"
-			width="1em"
-			height="1em"
-			focusable="false"
-			role="img"
-			aria-label="geo alt fill"
-			xmlns="http://www.w3.org/2000/svg"
-			fill="#e93f63"
-		>
-			<g>
-				<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path>
-			</g>
-		</svg>
-	);
 
 	return (
 		<Layout>
-			<Layout.Header className="fixed z-10 w-full bg-[#112b64]"></Layout.Header>
-			<div className="mb-16"></div>
-			<Layout.Content className="bg-white">
-				<Line {...config} />
+			<Layout.Header className="fixed z-10 flex w-full items-center bg-white shadow">
+				<div className="flex flex-1 items-center justify-between">
+					<div className="flex items-center space-x-4">
+						<div className="relative flex h-14 w-14">
+							<img src={Logo} alt="" />
+						</div>
+						<div className="flex items-center text-2xl">ZEMIT</div>
+					</div>
+					<div className="flex flex-1 justify-end">
+						<Menu mode="horizontal" defaultSelectedKeys={['dashboard']} className="flex-1 justify-end">
+							<Menu.Item key="dashboard">
+								<Link to="/">Dashboard</Link>
+							</Menu.Item>
+							<Menu.Item key="reports">
+								<Link to="/reports">Reports</Link>
+							</Menu.Item>
+							<Menu.Item key="population">
+								<Link to="/">Population</Link>
+							</Menu.Item>
+							<Menu.Item key="gaps-in-care">
+								<Link to="/">Gaps in Care</Link>
+							</Menu.Item>
+							<Menu.Item key="goal-tracker">
+								<Link to="/goal-tracker">Goal Tracker</Link>
+							</Menu.Item>
+						</Menu>
+					</div>
+				</div>
+			</Layout.Header>
+			<Layout.Content className="h-full min-h-screen bg-slate-50 pt-16">
+				<div className="m-auto mt-6 max-w-screen-xl space-y-6">
+					{/* <section className="Card">
+						<div className=" flex overflow-hidden rounded-2xl bg-white p-6 shadow-lg">
+							<div className="relative">
+								<img src={Logo} alt="" />
+							</div>
+							<div className="flex flex-col">
+								<div className="text-xl">ZEMIT Healthcare</div>
+								<div className="flex items-center">
+									<UserOutlined />
+									<div className="ml-2 text-base">John Doe</div>
+								</div>
+							</div>
+						</div>
+					</section> */}
+					<section>
+						<div className="flex space-x-6">
+							<div className="h-[28rem] w-full max-w-xs rounded-2xl bg-white px-6 py-10 shadow-lg">
+								<div className="mb-4 text-xl font-medium">Project List</div>
+								<div className="h-80 space-y-2 overflow-auto">
+									{Array(8)
+										.fill(0)
+										.map((_, index) => (
+											<div key={`projecy-card__` + index}>
+												<div className="flex items-center space-x-3">
+													<TeamOutlined style={{ fontSize: `32px` }} />
+
+													<div className="overflow-hidden">
+														<div className="overflow-hidden text-ellipsis whitespace-nowrap">
+															ZEMITRUN - MAY2021
+														</div>
+														<div className="text-gray-400">Last updated: 04/06/2022</div>
+													</div>
+												</div>
+												<Divider />
+											</div>
+										))}
+								</div>
+							</div>
+							<div className="w-full flex-1 rounded-2xl bg-white px-6 py-10 shadow-lg">
+								<div className="mb-4 text-xl font-medium">Cumulative Gap Opportunities</div>
+								<Pie {...config} />
+							</div>
+							<div className="h-fit w-full max-w-xs rounded-2xl bg-white px-6 py-10 shadow-lg">
+								<div className="text-xl font-medium">Navigational Items</div>
+								<div className="mb-4 text-xs font-medium">Imperial Health Plan of California MAPD</div>
+								<div className="space-y-4">
+									<div className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80">
+										Rate Sheet by Population
+									</div>
+									<div className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80">
+										Rate Sheet by Provider
+									</div>
+									<div className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80">
+										Gaps in Care
+									</div>
+									<div className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80">
+										Goal Tracker
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
 			</Layout.Content>
 			{/* <Layout.Footer></Layout.Footer> */}
 		</Layout>
