@@ -1,14 +1,23 @@
 import React from 'react';
 
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import Logo from '@/assets/images/mihalik-group-logo.png';
-
-const onFinish = values => {
-	console.log('Success:', values);
-};
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-	console.log(import.meta.env.VITE_USERNAME + ' ' + import.meta.env.VITE_PASSWORD);
+	// console.log(import.meta.env.VITE_USERNAME + ' ' + import.meta.env.VITE_PASSWORD);
+	const navigate = useNavigate();
+	const onFinish = values => {
+		console.log('Success:', values);
+		if (values.username === import.meta.env.VITE_USERNAME && values.password === import.meta.env.VITE_PASSWORD) {
+			localStorage.setItem('token', 'TEST_TOKEN');
+			message.success('Login successful');
+			navigate('/');
+		} else {
+			message.error('Username or password is incorrect');
+		}
+	};
+
 	return (
 		<div className="m-auto max-w-lg p-16">
 			{/* <h1 className="text-center text-2xl">Sign in to ZENITH</h1> */}
