@@ -7,8 +7,11 @@ import { Pie } from '@ant-design/charts';
 import { UserOutlined, CalendarOutlined, TeamOutlined } from '@ant-design/icons';
 import Logo from '@/assets/images/mihalik-group-logo.png';
 import { Link } from 'react-router-dom';
+import { FCTMEASOUT } from '@/store/table_column';
+import { MEASURE_ID } from '@/store/table_column';
 
 function Reports() {
+	const [data, setData] = useState([]);
 	const routes = [
 		{
 			path: '/',
@@ -21,42 +24,181 @@ function Reports() {
 
 	const columns = [
 		{
-			title: 'MEASURE',
-			dataIndex: 'MEASURE',
-			key: 'MEASURE'
+			title: 'DBLREP_POP_ID',
+			dataIndex: 'DBLREP_POP_ID',
+			key: 'DBLREP_POP_ID'
 		},
 		{
-			title: 'SUB_MEASURE',
-			dataIndex: 'SUB_MEASURE',
-			key: 'SUB_MEASURE'
+			title: 'DBLENTITY_ID',
+			dataIndex: 'DBLENTITY_ID',
+			key: 'DBLENTITY_ID'
 		},
 		{
-			title: 'ELIG_POP',
-			dataIndex: 'ELIG_POP',
-			key: 'ELIG_POP'
+			title: 'CHVLOB',
+			dataIndex: 'CHVLOB',
+			key: 'CHVLOB'
+		},
+		{
+			title: 'CHVMEMNBR',
+			dataIndex: 'CHVMEMNBR',
+			key: 'CHVMEMNBR'
+		},
+		{
+			title: 'DBLAGE_MO',
+			dataIndex: 'DBLAGE_MO',
+			key: 'DBLAGE_MO'
+		},
+		{
+			title: 'DBLAGE',
+			dataIndex: 'DBLAGE',
+			key: 'DBLAGE'
+		},
+		{
+			title: 'DBLSTRAT_ID',
+			dataIndex: 'DBLSTRAT_ID',
+			key: 'DBLSTRAT_ID'
+		},
+		{
+			title: 'CE',
+			dataIndex: 'CE',
+			key: 'CE'
+		},
+		{
+			title: 'BE',
+			dataIndex: 'BE',
+			key: 'BE'
+		},
+		{
+			title: 'AD',
+			dataIndex: 'AD',
+			key: 'AD'
+		},
+		{
+			title: 'IESD',
+			dataIndex: 'IESD',
+			key: 'IESD'
+		},
+		{
+			title: 'DEN1',
+			dataIndex: 'DEN1',
+			key: 'DEN1'
+		},
+		{
+			title: 'EXCL_OPT',
+			dataIndex: 'EXCL_OPT',
+			key: 'EXCL_OPT'
+		},
+		{
+			title: 'EXCL_OPT_DATE',
+			dataIndex: 'EXCL_OPT_DATE',
+			key: 'EXCL_OPT_DATE'
+		},
+		{
+			title: 'EXCL_REQ',
+			dataIndex: 'EXCL_REQ',
+			key: 'EXCL_REQ'
+		},
+		{
+			title: 'EXCL_REQ_DATE',
+			dataIndex: 'EXCL_REQ_DATE',
+			key: 'EXCL_REQ_DATE'
+		},
+		{
+			title: 'EXCL_HOSP',
+			dataIndex: 'EXCL_HOSP',
+			key: 'EXCL_HOSP'
+		},
+		{
+			title: 'EXCL_DECEASED',
+			dataIndex: 'EXCL_DECEASED',
+			key: 'EXCL_DECEASED'
+		},
+		{
+			title: 'NUM1',
+			dataIndex: 'NUM1',
+			key: 'NUM1'
+		},
+		{
+			title: 'SNUM1',
+			dataIndex: 'SNUM1',
+			key: 'SNUM1'
+		},
+		{
+			title: 'NUM1_DATE1',
+			dataIndex: 'NUM1_DATE1',
+			key: 'NUM1_DATE1'
+		},
+		{
+			title: 'AGE',
+			dataIndex: 'AGE',
+			key: 'AGE'
+		},
+		{
+			title: 'CHVGENDER',
+			dataIndex: 'CHVGENDER',
+			key: 'CHVGENDER'
 		}
 	];
 
-	const data = [
-		{
-			key: '1',
-			MEASURE: 'John Brown',
-			SUB_MEASURE: 32,
-			ELIG_POP: 'New York No. 1 Lake Park'
-		},
-		{
-			key: '2',
-			MEASURE: 'Jim Green',
-			SUB_MEASURE: 42,
-			ELIG_POP: 'London No. 1 Lake Park'
-		},
-		{
-			key: '3',
-			MEASURE: 'Joe Black',
-			SUB_MEASURE: 32,
-			ELIG_POP: 'Sidney No. 1 Lake Park'
-		}
-	];
+	const handleChange = async value => {
+		console.log(`selected ${value}`);
+		fetch(`https://627908956ac99a91066137ab.mockapi.io/FCTMEASOUT`)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data);
+				// setData(data);
+			});
+	};
+
+	useEffect(() => {
+		const col_tmp = [];
+		const col = [];
+		FCTMEASOUT[0].split(',').map(item => {
+			col_tmp.push(item.trim());
+			// col.push({
+			// 	title: item,
+			// 	dataIndex: item,
+			// 	key: item
+			// });
+			// console.log(item);
+		});
+
+		col_tmp.map(item => {
+			col.push({
+				title: item,
+				dataIndex: item,
+				key: item
+			});
+		});
+
+		fetch(`https://627908956ac99a91066137ab.mockapi.io/FCTMEASOUT`)
+			.then(res => res.json())
+			.then(data => {
+				setData(data);
+			});
+	}, []);
+
+	// const data = [
+	// 	{
+	// 		key: '1',
+	// 		MEASURE: 'John Brown',
+	// 		SUB_MEASURE: 32,
+	// 		ELIG_POP: 'New York No. 1 Lake Park'
+	// 	},
+	// 	{
+	// 		key: '2',
+	// 		MEASURE: 'Jim Green',
+	// 		SUB_MEASURE: 42,
+	// 		ELIG_POP: 'London No. 1 Lake Park'
+	// 	},
+	// 	{
+	// 		key: '3',
+	// 		MEASURE: 'Joe Black',
+	// 		SUB_MEASURE: 32,
+	// 		ELIG_POP: 'Sidney No. 1 Lake Park'
+	// 	}
+	// ];
+
 	return (
 		<Layout>
 			<Layout.Header className="fixed z-10 flex w-full items-center bg-white shadow">
@@ -75,14 +217,14 @@ function Reports() {
 							<Menu.Item key="reports">
 								<Link to="/reports">Reports</Link>
 							</Menu.Item>
+							<Menu.Item key="goal-tracker">
+								<Link to="/goal-tracker">Goal Tracker</Link>
+							</Menu.Item>
 							<Menu.Item key="population">
 								<Link to="/">Population</Link>
 							</Menu.Item>
 							<Menu.Item key="gaps-in-care">
 								<Link to="/">Gaps in Care</Link>
-							</Menu.Item>
-							<Menu.Item key="goal-tracker">
-								<Link to="/goal-tracker">Goal Tracker</Link>
 							</Menu.Item>
 						</Menu>
 					</div>
@@ -110,16 +252,19 @@ function Reports() {
 										showSearch
 										placeholder="Filter by measures"
 										optionFilterProp="children"
+										onChange={handleChange}
 										filterOption={(input, option) =>
 											option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
 										}
 									>
-										<Select.Option value="AAB">AAB</Select.Option>
-										<Select.Option value="AAP">AAP</Select.Option>
-										<Select.Option value="ABA">ABA</Select.Option>
+										{MEASURE_ID.map(item => (
+											<Select.Option key={item} value={item}>
+												{item}
+											</Select.Option>
+										))}
 									</Select>
 									<div className=" py-4">
-										<Table columns={columns} dataSource={data} />
+										<Table columns={columns} dataSource={data} scroll={{ x: 1200 }} />
 									</div>
 								</div>
 							</div>

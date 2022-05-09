@@ -134,14 +134,14 @@ function GoalTracker() {
 							<Menu.Item key="reports">
 								<Link to="/reports">Reports</Link>
 							</Menu.Item>
+							<Menu.Item key="goal-tracker">
+								<Link to="/goal-tracker">Goal Tracker</Link>
+							</Menu.Item>
 							<Menu.Item key="population">
 								<Link to="/">Population</Link>
 							</Menu.Item>
 							<Menu.Item key="gaps-in-care">
 								<Link to="/">Gaps in Care</Link>
-							</Menu.Item>
-							<Menu.Item key="goal-tracker">
-								<Link to="/goal-tracker">Goal Tracker</Link>
 							</Menu.Item>
 						</Menu>
 					</div>
