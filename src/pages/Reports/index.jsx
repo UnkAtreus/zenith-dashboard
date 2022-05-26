@@ -1,6 +1,23 @@
 // http://13.78.224.192:8002/api/v1/ratesheets?userEmail=ihp@yopmail.com&projectId=18f474e0-d44d-4c32-9573-720e71d833af&population=Imperial%20Health%20Plan%20of%20California%20MAPD&measure=&pageSize=50&pageIndex=1
 import react, { useEffect, useState } from 'react';
-import { Button, Input, Layout, Tag, Menu, Divider, PageHeader, Breadcrumb, Select, Table, Space } from 'antd';
+import {
+	Button,
+	Input,
+	Layout,
+	Tag,
+	Menu,
+	Divider,
+	PageHeader,
+	Breadcrumb,
+	Select,
+	Table,
+	Space,
+	Row,
+	Statistic,
+	Tabs,
+	Descriptions,
+	Col
+} from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { Pie } from '@ant-design/charts';
@@ -9,9 +26,12 @@ import Logo from '@/assets/images/mihalik-group-logo.png';
 import { Link } from 'react-router-dom';
 import { FCTMEASOUT } from '@/store/table_column';
 import { MEASURE_ID } from '@/store/table_column';
+import { Column } from '@antv/g2plot';
 
 function Reports() {
 	const [data, setData] = useState([]);
+
+	const { TabPane } = Tabs;
 	const routes = [
 		{
 			path: '/',
@@ -234,35 +254,59 @@ function Reports() {
 				<div className="m-auto mt-6 max-w-screen-xl space-y-6">
 					<section>
 						<div className="flex space-x-6">
-							<div className="w-full flex-1 overflow-hidden rounded-2xl bg-white shadow-lg">
+							<div className="w-full flex-1 overflow-hidden rounded bg-white shadow-lg">
 								<PageHeader
-									title="Report"
+									title="Member Details"
+									onBack={() => null}
 									breadcrumb={
 										<Breadcrumb>
 											<Breadcrumb.Item>
-												<a href="/">Home</a>
+												<a href="/">Dashboard</a>
+											</Breadcrumb.Item>
+											<Breadcrumb.Item>
+												<a href="/">IDK of Thailand</a>
+											</Breadcrumb.Item>
+											<Breadcrumb.Item>
+												<a href="/">Member List</a>
 											</Breadcrumb.Item>
 
-											<Breadcrumb.Item>Reports</Breadcrumb.Item>
+											<Breadcrumb.Item>Member Details</Breadcrumb.Item>
 										</Breadcrumb>
 									}
-								/>
+									extra={[
+										<Button key="1" type="primary">
+											Export
+										</Button>
+									]}
+									footer={
+										<Tabs defaultActiveKey="1" size="small" type="card">
+											<TabPane tab="Claim" key="1" />
+											<TabPane tab="Lab" key="2" />
+											<TabPane tab="Rx" key="3" />
+											<TabPane tab="Supply" key="4" />
+										</Tabs>
+									}
+								>
+									<Row>
+										<Col span={2}>
+											<Statistic title="Measure" value="COCA" />
+										</Col>
+										<Col span={2}>
+											<Statistic title="Sub Measure" value="COLA" />
+										</Col>
+										<Divider type="vertical" className="h-auto" />
+
+										<Col span={7}>
+											<Descriptions size="small" column={2}>
+												<Descriptions.Item label="Firstname">Jone</Descriptions.Item>
+												<Descriptions.Item label="Lastname">Doe</Descriptions.Item>
+												<Descriptions.Item label="Gender">Male</Descriptions.Item>
+												<Descriptions.Item label="BirthDate">25/02/2077</Descriptions.Item>
+											</Descriptions>
+										</Col>
+									</Row>
+								</PageHeader>
 								<div className="px-6 pb-6">
-									<Select
-										showSearch
-										placeholder="Filter by measures"
-										optionFilterProp="children"
-										onChange={handleChange}
-										filterOption={(input, option) =>
-											option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-										}
-									>
-										{MEASURE_ID.map(item => (
-											<Select.Option key={item} value={item}>
-												{item}
-											</Select.Option>
-										))}
-									</Select>
 									<div className=" py-4">
 										<Table columns={columns} dataSource={data} scroll={{ x: 1200 }} />
 									</div>
