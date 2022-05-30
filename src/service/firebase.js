@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
 import { decode as base64_decode } from 'base-64';
+import { getAnalytics } from 'firebase/analytics';
+import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -18,18 +19,14 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
 export const signIn = async (email, password) => {
-	try {
-		await signInWithEmailAndPassword(auth, email, password)
-			.then(userCredential => {
-				// Signed in
-				const user = userCredential.user;
-				// ...
-			})
-			.catch(error => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-			});
-	} catch (error) {
-		throw error;
-	}
+	await signInWithEmailAndPassword(auth, email, password)
+		.then(userCredential => {
+			// Signed in
+			const user = userCredential.user;
+			// ...
+		})
+		.catch(error => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+		});
 };

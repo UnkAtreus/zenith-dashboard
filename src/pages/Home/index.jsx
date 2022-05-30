@@ -1,11 +1,11 @@
-import react, { useEffect, useState } from 'react';
-import { Button, Input, Layout, Tag, Menu, Divider } from 'antd';
-import axios from 'axios';
-import dayjs from 'dayjs';
+import React from 'react';
+
 import { Pie } from '@ant-design/charts';
-import { UserOutlined, CalendarOutlined, TeamOutlined } from '@ant-design/icons';
-import Logo from '@/assets/images/mihalik-group-logo.png';
+import { TeamOutlined } from '@ant-design/icons';
+import { Layout, Menu, Divider } from 'antd';
 import { Link } from 'react-router-dom';
+
+import Logo from '@/assets/images/mihalik-group-logo.png';
 
 function Home() {
 	const data = [

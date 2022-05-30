@@ -1,46 +1,29 @@
 // http://13.78.224.192:8002/api/v1/ratesheets?userEmail=ihp@yopmail.com&projectId=18f474e0-d44d-4c32-9573-720e71d833af&population=Imperial%20Health%20Plan%20of%20California%20MAPD&measure=&pageSize=50&pageIndex=1
-import react, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import {
 	Button,
-	Input,
 	Layout,
-	Tag,
 	Menu,
 	Divider,
 	PageHeader,
 	Breadcrumb,
-	Select,
 	Table,
-	Space,
 	Row,
 	Statistic,
 	Tabs,
 	Descriptions,
 	Col
 } from 'antd';
-import axios from 'axios';
-import dayjs from 'dayjs';
-import { Pie } from '@ant-design/charts';
-import { UserOutlined, CalendarOutlined, TeamOutlined } from '@ant-design/icons';
-import Logo from '@/assets/images/mihalik-group-logo.png';
 import { Link } from 'react-router-dom';
+
+import Logo from '@/assets/images/mihalik-group-logo.png';
 import { FCTMEASOUT } from '@/store/table_column';
-import { MEASURE_ID } from '@/store/table_column';
-import { Column } from '@antv/g2plot';
 
 function Reports() {
 	const [data, setData] = useState([]);
 
 	const { TabPane } = Tabs;
-	const routes = [
-		{
-			path: '/',
-			breadcrumbName: 'Home'
-		},
-		{
-			breadcrumbName: 'Reports'
-		}
-	];
 
 	const columns = [
 		{
@@ -159,16 +142,6 @@ function Reports() {
 			key: 'CHVGENDER'
 		}
 	];
-
-	const handleChange = async value => {
-		console.log(`selected ${value}`);
-		fetch(`https://627908956ac99a91066137ab.mockapi.io/FCTMEASOUT`)
-			.then(res => res.json())
-			.then(data => {
-				console.log(data);
-				// setData(data);
-			});
-	};
 
 	useEffect(() => {
 		const col_tmp = [];

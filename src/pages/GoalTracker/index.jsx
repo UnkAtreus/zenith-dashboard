@@ -1,12 +1,10 @@
-import react, { useEffect, useState } from 'react';
-import { Button, Input, Layout, Tag, Menu, Divider, PageHeader, Breadcrumb, Select, Table, Space } from 'antd';
-import axios from 'axios';
-import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
+
 import { Column, Heatmap, Area } from '@ant-design/charts';
-import { UserOutlined, CalendarOutlined, TeamOutlined } from '@ant-design/icons';
-import Logo from '@/assets/images/mihalik-group-logo.png';
-import { HeatMapData } from './constant';
+import { Layout, Menu, PageHeader, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
+
+import Logo from '@/assets/images/mihalik-group-logo.png';
 
 function GoalTracker() {
 	const [dataHeatmap, setDataHeatmap] = useState([]);
