@@ -73,7 +73,7 @@ function Home() {
 							mode="horizontal"
 							defaultSelectedKeys={['dashboard']}
 							className="flex-1 justify-end"
-							itmes={MENUITEMS}
+							items={MENUITEMS}
 						/>
 					</div>
 				</div>
