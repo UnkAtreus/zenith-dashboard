@@ -1,9 +1,10 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import vitePluginImp from 'vite-plugin-imp';
-import { getThemeVariables } from 'antd/dist/theme';
-
+/* eslint-disable no-undef */
 import path from 'path';
+
+import react from '@vitejs/plugin-react';
+import { getThemeVariables } from 'antd/dist/theme';
+import { defineConfig } from 'vite';
+import vitePluginImp from 'vite-plugin-imp';
 
 export default defineConfig({
 	plugins: [

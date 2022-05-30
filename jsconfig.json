@@ -3,32 +3,28 @@
         "baseUrl": "./",
         "jsx": "react",
         "paths": {
-            "@src/*": [
-                "./src/*"
-            ],
-            "@root/*": [
-                "./*"
-            ],
-            "@store/*": [
+           
+            
+            "@/store/*": [
                 "./src/store/*"
             ],
-            "@assets/*": [
+            "@/assets/*": [
                 "./src/assets/*"
             ],
-            "@styles/": [
+            "@/styles/": [
                 "./src/assets/styles/*"
             ],
-            "@utilities": [
-                "./src/utilities"
-            ],
-            "@utilities/*": [
+            "@/utilities/*": [
                 "./src/utilities/*"
             ],
-            "@components": [
-                "./src/components"
+            "@/components/*": [
+                "./src/components/*"
             ],
-            "@pages/*": [
+            "@/pages/*": [
                 "./src/pages/*"
+            ],
+            "@/src/*": [
+                "./src/*"
             ]
         },
     },

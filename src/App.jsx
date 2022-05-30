@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
-import GoalTracker from '../pages/GoalTracker';
+import GoalTracker from './pages/GoalTracker';
 
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';

@@ -15,6 +15,7 @@ module.exports = {
 	plugins: ['react', 'import'],
 	rules: {
 		'react/prop-types': 'off',
+		'no-unused-vars': 'off',
 		'import/order': [
 			'error',
 			{
