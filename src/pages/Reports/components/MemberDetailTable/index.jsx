@@ -5,7 +5,7 @@ import { Button, Divider, PageHeader, Breadcrumb, Table, Row, Statistic, Tabs, D
 import { FCTMEASOUT } from '@/store/table_column';
 import makeColumn from '@/utilities/makeColumn';
 
-function MemberDetailTable() {
+function MemberDetailTable({ setStep }) {
 	const [data, setData] = useState([]);
 
 	const { TabPane } = Tabs;
@@ -22,17 +22,31 @@ function MemberDetailTable() {
 		<div className="w-full flex-1 overflow-hidden rounded bg-white shadow-lg">
 			<PageHeader
 				title="Member Details"
-				onBack={() => null}
+				onBack={() => setStep(1)}
 				breadcrumb={
 					<Breadcrumb>
 						<Breadcrumb.Item>
 							<a href="/">Dashboard</a>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>
-							<a href="/">IDK of Thailand</a>
+							<a
+								href=""
+								onClick={() => {
+									setStep(0);
+								}}
+							>
+								IDK of Thailand
+							</a>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>
-							<a href="/">Member List</a>
+							<a
+								href=""
+								onClick={() => {
+									setStep(1);
+								}}
+							>
+								Member List
+							</a>
 						</Breadcrumb.Item>
 
 						<Breadcrumb.Item>Member Details</Breadcrumb.Item>

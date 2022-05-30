@@ -1,15 +1,17 @@
 // http://13.78.224.192:8002/api/v1/ratesheets?userEmail=ihp@yopmail.com&projectId=18f474e0-d44d-4c32-9573-720e71d833af&population=Imperial%20Health%20Plan%20of%20California%20MAPD&measure=&pageSize=50&pageIndex=1
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Layout, Menu } from 'antd';
 
 import MemberDetailTable from './components/MemberDetailTable';
 import MemberListTable from './components/MemberListTable';
+import RateSummaryTable from './components/RateSummaryTable';
 
 import Logo from '@/assets/images/mihalik-group-logo.png';
 import { MENUITEMS } from '@/store/menu_title';
 
 function Reports() {
+	const [step, setStep] = useState(0);
 	// const data = [
 	// 	{
 	// 		key: '1',
@@ -55,8 +57,9 @@ function Reports() {
 				<div className="m-auto mt-6 max-w-screen-xl space-y-6">
 					<section>
 						<div className="flex space-x-6">
-							<MemberListTable />
-							{/* <MemberDetailTable /> */}
+							{step === 0 && <RateSummaryTable setStep={setStep} />}
+							{step === 1 && <MemberListTable setStep={setStep} />}
+							{step === 2 && <MemberDetailTable setStep={setStep} />}
 						</div>
 					</section>
 				</div>

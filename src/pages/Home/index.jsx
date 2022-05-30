@@ -6,6 +6,7 @@ import { Layout, Menu, Divider } from 'antd';
 import { Link } from 'react-router-dom';
 
 import Logo from '@/assets/images/mihalik-group-logo.png';
+import { MENUITEMS } from '@/store/menu_title';
 
 function Home() {
 	const data = [
@@ -68,23 +69,12 @@ function Home() {
 						<div className="flex items-center text-2xl">ZENITH</div>
 					</div>
 					<div className="flex flex-1 justify-end">
-						<Menu mode="horizontal" defaultSelectedKeys={['dashboard']} className="flex-1 justify-end">
-							<Menu.Item key="dashboard">
-								<Link to="/">Dashboard</Link>
-							</Menu.Item>
-							<Menu.Item key="reports">
-								<Link to="/reports">Reports</Link>
-							</Menu.Item>
-							<Menu.Item key="goal-tracker">
-								<Link to="/goal-tracker">Goal Tracker</Link>
-							</Menu.Item>
-							<Menu.Item key="population">
-								<Link to="/">Population</Link>
-							</Menu.Item>
-							<Menu.Item key="gaps-in-care">
-								<Link to="/">Gaps in Care</Link>
-							</Menu.Item>
-						</Menu>
+						<Menu
+							mode="horizontal"
+							defaultSelectedKeys={['dashboard']}
+							className="flex-1 justify-end"
+							itmes={MENUITEMS}
+						/>
 					</div>
 				</div>
 			</Layout.Header>
