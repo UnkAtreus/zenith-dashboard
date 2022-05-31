@@ -70,9 +70,7 @@ function MemberDetailTable({ setStep }) {
 					<Col span={2}>
 						<Statistic title="Measure" value="COCA" />
 					</Col>
-					<Col span={2}>
-						<Statistic title="Sub Measure" value="COLA" />
-					</Col>
+
 					<Divider type="vertical" className="h-auto" />
 
 					<Col span={7}>

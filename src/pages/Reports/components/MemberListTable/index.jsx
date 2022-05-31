@@ -49,9 +49,6 @@ function MemberListTable({ setStep }) {
 					<Col span={2}>
 						<Statistic title="Measure" value="COCA" />
 					</Col>
-					<Col span={2}>
-						<Statistic title="Sub Measure" value="COLA" />
-					</Col>
 				</Row>
 			</PageHeader>
 			<div className="px-6 pb-6">
