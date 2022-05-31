@@ -5,14 +5,21 @@ import { Button, PageHeader, Breadcrumb, Table, Row, Statistic, Col } from 'antd
 import { GAPS_IN_CARE } from '@/store/table_column';
 import makeColumn from '@/utilities/makeColumn';
 
-function MemberListTable({ setStep }) {
+function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const column = makeColumn(GAPS_IN_CARE);
+
 	useEffect(() => {
+		setIsLoading(true);
 		fetch(`https://627908956ac99a91066137ab.mockapi.io/GAPS_IN_CARE`)
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
+			})
+			.finally(() => {
+				setIsLoading(false);
 			});
 	}, []);
 
@@ -27,14 +34,14 @@ function MemberListTable({ setStep }) {
 							<a href="/">Dashboard</a>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>
-							<a
-								href=""
+							<span
+								className="cursor-pointer"
 								onClick={() => {
 									setStep(0);
 								}}
 							>
-								IDK of Thailand
-							</a>
+								{localStorage.getItem('population')}
+							</span>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>Member List</Breadcrumb.Item>
 					</Breadcrumb>
@@ -46,8 +53,8 @@ function MemberListTable({ setStep }) {
 				]}
 			>
 				<Row>
-					<Col span={2}>
-						<Statistic title="Measure" value="COCA" />
+					<Col span={4}>
+						<Statistic title="Measure" value={ratesummaryRecord.CHVMEASURE} />
 					</Col>
 				</Row>
 			</PageHeader>
@@ -59,11 +66,13 @@ function MemberListTable({ setStep }) {
 						scroll={{ x: 1200 }}
 						onRow={(record, rowIndex) => {
 							return {
-								onClick: event => {
+								onDoubleClick: event => {
+									setMemberListRecord(record);
 									setStep(2);
 								}
 							};
 						}}
+						loading={isLoading}
 					/>
 				</div>
 			</div>

@@ -1,7 +1,8 @@
 // http://13.78.224.192:8002/api/v1/ratesheets?userEmail=ihp@yopmail.com&projectId=18f474e0-d44d-4c32-9573-720e71d833af&population=Imperial%20Health%20Plan%20of%20California%20MAPD&measure=&pageSize=50&pageIndex=1
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Layout, Menu } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import MemberDetailTable from './components/MemberDetailTable';
 import MemberListTable from './components/MemberListTable';
@@ -12,6 +13,12 @@ import { MENUITEMS } from '@/store/menu_title';
 
 function Reports() {
 	const [step, setStep] = useState(0);
+	const [ratesummaryRecord, setRateSummaryRecord] = useState({});
+	const [memberListRecord, setMemberListRecord] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
+
+	const navigate = useNavigate();
+
 	// const data = [
 	// 	{
 	// 		key: '1',
@@ -33,6 +40,14 @@ function Reports() {
 	// 	}
 	// ];
 
+	useEffect(() => {
+		const population = localStorage.getItem('population');
+
+		if (!population) {
+			navigate('/login');
+		}
+	}, []);
+
 	return (
 		<Layout>
 			<Layout.Header className="fixed z-10 flex w-full items-center bg-white shadow">
@@ -46,7 +61,7 @@ function Reports() {
 					<div className="flex flex-1 justify-end">
 						<Menu
 							mode="horizontal"
-							defaultSelectedKeys={['reports']}
+							defaultSelectedKeys={['dashboard']}
 							className="flex-1 justify-end"
 							items={MENUITEMS}
 						/>
@@ -57,9 +72,23 @@ function Reports() {
 				<div className="m-auto mt-6 max-w-screen-xl space-y-6">
 					<section>
 						<div className="flex space-x-6">
-							{step === 0 && <RateSummaryTable setStep={setStep} />}
-							{step === 1 && <MemberListTable setStep={setStep} />}
-							{step === 2 && <MemberDetailTable setStep={setStep} />}
+							{step === 0 && (
+								<RateSummaryTable setStep={setStep} setRateSummaryRecord={setRateSummaryRecord} />
+							)}
+							{step === 1 && (
+								<MemberListTable
+									setStep={setStep}
+									setMemberListRecord={setMemberListRecord}
+									ratesummaryRecord={ratesummaryRecord}
+								/>
+							)}
+							{step === 2 && (
+								<MemberDetailTable
+									setStep={setStep}
+									memberListRecord={memberListRecord}
+									ratesummaryRecord={ratesummaryRecord}
+								/>
+							)}
 						</div>
 					</section>
 				</div>

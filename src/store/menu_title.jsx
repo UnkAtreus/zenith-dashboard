@@ -11,14 +11,19 @@ export const MENUITEMS = [
 		],
 		key: 'dashboard'
 	},
-	{
-		label: [
-			<Link to="/reports" key="reports">
-				Reports
-			</Link>
-		],
-		key: 'reports'
-	},
+	// {
+	// 	label: [
+	// 		<Link to="/reports" key="reports">
+	// 			Reports
+	// 		</Link>
+	// 	],
+	// 	key: 'reports'
+	// },
+	// {
+	// 	label: 'Population',
+	// 	key: 'population',
+	// 	children: [{ label: 'IHP of California MAPD', key: 'IHP_of_California_MAPD' }]
+	// },
 	{
 		label: [
 			<Link to="/goal-tracker" key="goal-tracker">
@@ -26,14 +31,6 @@ export const MENUITEMS = [
 			</Link>
 		],
 		key: 'goal-tracker'
-	},
-	{
-		label: [
-			<Link to="/" key="population">
-				Population
-			</Link>
-		],
-		key: 'population'
 	},
 	{
 		label: [

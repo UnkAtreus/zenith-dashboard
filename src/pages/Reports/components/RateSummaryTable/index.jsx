@@ -6,15 +6,35 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { RATE_SUMMARY } from '@/store/table_column';
 import makeColumn from '@/utilities/makeColumn';
 
-function RateSummaryTable({ setStep }) {
+function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const navigate = useNavigate();
-	const column = makeColumn(RATE_SUMMARY);
+
+	const column = makeColumn(RATE_SUMMARY).map(col => {
+		if (col.key === 'CHVMEASURE') {
+			return {
+				...col,
+				render: (text, record) => (
+					<div onClick={() => setStep(1)} className="cursor-pointer text-blue-500">
+						{text}
+					</div>
+				)
+			};
+		}
+		return col;
+	});
+
 	useEffect(() => {
+		setIsLoading(true);
 		fetch(`https://627908956ac99a91066137ab.mockapi.io/RATE_SUMMARY`)
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
+			})
+			.finally(() => {
+				setIsLoading(false);
 			});
 	}, []);
 
@@ -28,7 +48,7 @@ function RateSummaryTable({ setStep }) {
 						<Breadcrumb.Item>
 							<a href="/">Dashboard</a>
 						</Breadcrumb.Item>
-						<Breadcrumb.Item>IDK of Thailand</Breadcrumb.Item>
+						<Breadcrumb.Item>{localStorage.getItem('population')}</Breadcrumb.Item>
 					</Breadcrumb>
 				}
 				extra={[
@@ -47,10 +67,12 @@ function RateSummaryTable({ setStep }) {
 						onRow={(record, rowIndex) => {
 							return {
 								onClick: event => {
-									setStep(1);
+									console.log(record);
+									setRateSummaryRecord(record);
 								}
 							};
 						}}
+						loading={isLoading}
 					/>
 				</div>
 			</div>
