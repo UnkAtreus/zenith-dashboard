@@ -190,7 +190,7 @@ function Home() {
 
 							<div className="h-fit w-full max-w-xs rounded-2xl bg-white px-6 py-10 shadow-lg">
 								<div className="text-xl font-medium">Navigational Items</div>
-								<div className="mb-4 text-xs font-medium">Imperial Health Plan of California MAPD</div>
+								<div className="mb-4 text-xs font-medium">{population}</div>
 								<div className="space-y-4">
 									<div
 										onClick={() => navigate('/reports')}
