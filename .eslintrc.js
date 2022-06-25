@@ -12,43 +12,49 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'module'
 	},
-	plugins: ['react', 'import'],
-	rules: {
-		'react/prop-types': 'off',
-		'no-unused-vars': 'off',
-		'import/order': [
-			'error',
-			{
-				pathGroups: [
+	overrides: [
+		{
+			files: ['**/*.js', '**/*.jsx'],
+			plugins: ['react', 'import'],
+			extends: ['eslint:recommended', 'plugin:react/recommended'],
+			rules: {
+				'react/prop-types': 'off',
+				'no-unused-vars': 'off',
+				'import/order': [
+					'error',
 					{
-						pattern: 'react',
-						group: 'external',
-						position: 'before'
-					},
-					{
-						pattern: 'next',
-						group: 'external',
-						position: 'after'
-					},
-					{
-						pattern: 'common/**',
-						group: 'internal',
-						position: 'after'
-					},
-					{
-						pattern: 'modules/**',
-						group: 'internal',
-						position: 'after'
+						pathGroups: [
+							{
+								pattern: 'react',
+								group: 'external',
+								position: 'before'
+							},
+							{
+								pattern: 'next',
+								group: 'external',
+								position: 'after'
+							},
+							{
+								pattern: 'common/**',
+								group: 'internal',
+								position: 'after'
+							},
+							{
+								pattern: 'modules/**',
+								group: 'internal',
+								position: 'after'
+							}
+						],
+						groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+						'newlines-between': 'always',
+						alphabetize: {
+							order: 'asc',
+							caseInsensitive: true
+						},
+						pathGroupsExcludedImportTypes: ['react', 'next']
 					}
-				],
-				groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-				'newlines-between': 'always',
-				alphabetize: {
-					order: 'asc',
-					caseInsensitive: true
-				},
-				pathGroupsExcludedImportTypes: ['react', 'next']
+				]
 			}
-		]
-	}
+		}
+	]
 };

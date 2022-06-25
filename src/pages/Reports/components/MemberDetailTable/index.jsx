@@ -3,26 +3,52 @@ import React, { useEffect, useState } from 'react';
 import { Button, Divider, PageHeader, Breadcrumb, Table, Row, Statistic, Tabs, Descriptions, Col } from 'antd';
 import dayjs from 'dayjs';
 
+import MemberDetailService from '@/service/memberDetail';
 import { FCTMEASOUT } from '@/store/table_column';
 import makeColumn from '@/utilities/makeColumn';
 
 function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 	const [data, setData] = useState([]);
+	const [column, setColumn] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const { TabPane } = Tabs;
-	const columns = makeColumn(FCTMEASOUT);
+
+	const fetchData = type => {
+		setIsLoading(true);
+		const userId = memberListRecord.CHVMEMNBR;
+		if (userId) {
+			MemberDetailService.list(userId, type ?? 'claim')
+				.then(({ data, columns }) => {
+					setData(data);
+					const column = columns.map(col => {
+						if (
+							col.key === 'DTMSERVICE_DT' ||
+							col.key === 'DTMFROMDT' ||
+							col.key === 'DTMTHRUDT' ||
+							col.key === 'DTMPRES_FILL_DT'
+						) {
+							return {
+								...col,
+								render: (text, record) => {
+									if (text) {
+										return <div>{dayjs(text).format('MMM DD,YYYY')}</div>;
+									}
+								}
+							};
+						}
+						return col;
+					});
+					setColumn(column);
+				})
+				.finally(() => {
+					setIsLoading(false);
+				});
+		}
+	};
 
 	useEffect(() => {
-		setIsLoading(true);
-		fetch(`https://627908956ac99a91066137ab.mockapi.io/FCTMEASOUT`)
-			.then(res => res.json())
-			.then(data => {
-				setData(data);
-			})
-			.finally(() => {
-				setIsLoading(false);
-			});
+		fetchData();
 	}, []);
 	return (
 		<div className="w-full flex-1 overflow-hidden rounded bg-white shadow-lg">
@@ -41,7 +67,7 @@ function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 									setStep(0);
 								}}
 							>
-								{localStorage.getItem('population')}
+								{JSON.parse(localStorage.getItem('population')).CHVREP_POP_NAME}
 							</span>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>
@@ -64,11 +90,11 @@ function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 					</Button>
 				]}
 				footer={
-					<Tabs defaultActiveKey="1" size="small" type="card">
-						<TabPane tab="Claim" key="1" />
-						<TabPane tab="Lab" key="2" />
-						<TabPane tab="Rx" key="3" />
-						<TabPane tab="Supply" key="4" />
+					<Tabs defaultActiveKey="claim" size="small" type="card" onChange={type => fetchData(type)}>
+						<TabPane tab="Claim" key="claim" />
+						<TabPane tab="Lab" key="lab" />
+						<TabPane tab="Rx" key="rx" />
+						<TabPane tab="Supply" key="supply" />
 					</Tabs>
 				}
 			>
@@ -93,7 +119,13 @@ function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 			</PageHeader>
 			<div className="px-6 pb-6">
 				<div className=" py-4">
-					<Table columns={columns} dataSource={data} scroll={{ x: 1200 }} loading={isLoading} />
+					<Table
+						rowKey={record => record.CHVCLAIMID + record.DBLLINENBR}
+						columns={column}
+						dataSource={data}
+						scroll={{ x: 1200 }}
+						loading={isLoading}
+					/>
 				</div>
 			</div>
 		</div>

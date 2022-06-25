@@ -1,15 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { Pie } from '@ant-design/charts';
 import { DownOutlined, TeamOutlined } from '@ant-design/icons';
 import { Layout, Menu, Divider, Dropdown, Space, Button } from 'antd';
+import { signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/images/mihalik-group-logo.png';
+import firebaseApp from '@/service/firebase';
+import PopulationService from '@/service/population';
 import { MENUITEMS } from '@/store/menu_title';
 
+const auth = getAuth(firebaseApp);
+
 function Home() {
-	const [population, setPopulation] = useState(``);
+	const [user, loading] = useAuthState(auth);
+
+	const [populations, setPopulations] = useState({ populationName: '', populationList: [], dropdownPop: [] });
+
 	const navigate = useNavigate();
 	const data = [
 		{
@@ -60,16 +70,49 @@ function Home() {
 		]
 	};
 
-	useEffect(() => {
-		const token = localStorage.getItem('token');
-		const population = localStorage.getItem('population');
-		if (!token && !population) {
-			navigate('/login');
-		} else {
-			setPopulation(population);
+	const getPopulation = async name => {
+		try {
+			const respond = await PopulationService.list();
+
+			const column = [];
+			respond.data.map(item => {
+				column.push({ label: item.CHVREP_POP_NAME, key: item.CHVREP_POP_NAME });
+			});
+
+			setPopulations({ populationName: name, populationList: respond.data, dropdownPop: column });
+		} catch (error) {
+			console.log(error);
 		}
+	};
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const population = JSON.parse(localStorage.getItem('population'));
+				if (!user && !population) {
+					navigate('/login');
+				}
+				const respond = await PopulationService.list();
+				const column = [];
+				respond.data.map(item => {
+					column.push({ label: item.CHVREP_POP_NAME, key: item.CHVREP_POP_NAME });
+				});
+				console.log(`render`);
+				setPopulations({
+					populationName: population.CHVREP_POP_NAME,
+					populationList: respond.data,
+					dropdownPop: column
+				});
+			} catch (error) {
+				console.log(error);
+				navigate('/login');
+			}
+		})();
 	}, []);
 
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 	return (
 		<Layout>
 			<Layout.Header className="fixed z-10 flex w-full items-center bg-white shadow">
@@ -108,33 +151,26 @@ function Home() {
 					</section> */}
 					<section>
 						<div className="flex w-full justify-between rounded-2xl bg-white px-6 py-6 shadow">
-							<h1 className="mb-0 text-xl">{population}</h1>
+							<h1 className="mb-0 text-xl">{populations.populationName}</h1>
 							<div className="flex items-center space-x-4">
 								<Dropdown
 									overlay={
 										<Menu
 											onClick={e => {
-												localStorage.setItem('population', e.key);
-												setPopulation(e.key);
+												// localStorage.setItem('population', e.key);
+												// setPopulation(e.key);
+
+												populations.map(item => {
+													if (item.CHVREP_POP_NAME === e.key) {
+														localStorage.setItem('population', JSON.stringify(item));
+														setPopulations(prev => ({
+															...prev,
+															populationName: e.key
+														}));
+													}
+												});
 											}}
-											items={[
-												{
-													label: 'IHP of California MAPD',
-													key: 'Imperial Health Plan of California MAPD'
-												},
-												{
-													label: 'IHP of California SNP',
-													key: 'Imperial Health Plan of California SNP'
-												},
-												{
-													label: 'IHP of Texas MAPD',
-													key: 'Imperial Health Plan of Texas MAPD'
-												},
-												{
-													label: 'IHP of Texas CSNP',
-													key: 'Imperial Health Plan of Texas CSNP'
-												}
-											]}
+											items={populations.dropdownPop}
 										/>
 									}
 									trigger={['click']}
@@ -151,6 +187,7 @@ function Home() {
 									onClick={() => {
 										localStorage.removeItem('token');
 										localStorage.removeItem('population');
+										signOut(auth);
 										navigate('/login');
 									}}
 								>
@@ -190,7 +227,7 @@ function Home() {
 
 							<div className="h-fit w-full max-w-xs rounded-2xl bg-white px-6 py-10 shadow-lg">
 								<div className="text-xl font-medium">Navigational Items</div>
-								<div className="mb-4 text-xs font-medium">{population}</div>
+								<div className="mb-4 text-xs font-medium">{populations.populationName}</div>
 								<div className="space-y-4">
 									<div
 										onClick={() => navigate('/reports')}

@@ -44,7 +44,7 @@ function Reports() {
 		const population = localStorage.getItem('population');
 
 		if (!population) {
-			navigate('/login');
+			// navigate('/login');
 		}
 	}, []);
 

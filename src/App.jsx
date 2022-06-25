@@ -10,11 +10,19 @@ import Reports from '@/pages/Reports';
 
 function App() {
 	const ProtectedRoute = ({ children }) => {
-		const token = localStorage.getItem('token');
+		// const token = localStorage.getItem('token');
 
-		if (!token) {
-			return <Navigate to="/login" replace />;
-		}
+		// if (!token) {
+		// 	return <Navigate to="/login" replace />;
+		// }
+		// if (!userRecoil.isAuthenticated) {
+		// 	const [user] = useAuthState(getAuth(firebaseApp));
+		// 	setUserRecoil({
+		// 		isAuthenticated: user !== null,
+		// 		user: user
+		// 	});
+		// }
+		// console.log(userRecoil);
 
 		return children;
 	};
@@ -37,14 +45,6 @@ function App() {
 					element={
 						<ProtectedRoute>
 							<Reports />
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path="/dashboard"
-					element={
-						<ProtectedRoute>
-							<Home />
 						</ProtectedRoute>
 					}
 				/>

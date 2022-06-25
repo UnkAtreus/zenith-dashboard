@@ -3,39 +3,55 @@ import React, { useEffect, useState } from 'react';
 import { Button, PageHeader, Breadcrumb, Table, Row, Statistic, Col } from 'antd';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { RATE_SUMMARY } from '@/store/table_column';
-import makeColumn from '@/utilities/makeColumn';
+import RateSummaryService from '@/service/rateSummary';
+import { MEASURE_ID, RATE_SUMMARY } from '@/store/table_column';
+import makeDropdown from '@/utilities/makeDropdown';
 
 function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 	const [data, setData] = useState([]);
+	const [column, setColumn] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const filter_meature = makeDropdown(MEASURE_ID);
 
 	const navigate = useNavigate();
 
-	const column = makeColumn(RATE_SUMMARY).map(col => {
-		if (col.key === 'CHVMEASURE') {
-			return {
-				...col,
-				render: (text, record) => (
-					<div onClick={() => setStep(1)} className="cursor-pointer text-blue-500">
-						{text}
-					</div>
-				)
-			};
-		}
-		return col;
-	});
-
 	useEffect(() => {
 		setIsLoading(true);
-		fetch(`https://627908956ac99a91066137ab.mockapi.io/RATE_SUMMARY`)
-			.then(res => res.json())
-			.then(data => {
-				setData(data);
-			})
-			.finally(() => {
-				setIsLoading(false);
-			});
+		const popId = JSON.parse(localStorage.getItem('population')).DBLENTITY_ID;
+		if (popId) {
+			RateSummaryService.list(popId)
+				.then(({ data, columns }) => {
+					setData(data);
+					const column = columns.map(col => {
+						if (col.key === 'CHVMEASURE') {
+							return {
+								...col,
+								filters: filter_meature,
+								filterMode: 'tree',
+								filterSearch: true,
+								onFilter: (value, record) => record.CHVMEASURE.startsWith(value),
+								render: (text, record) => (
+									<div key={text} onClick={() => setStep(1)} className="cursor-pointer text-blue-500">
+										{text}
+									</div>
+								)
+							};
+						}
+						if (col.key === 'DBLENTITY_ID' || col.key === 'DBLMASTER_POP_ID' || col.key === 'CHVLOB') {
+							return {
+								...col,
+								className: 'hidden'
+							};
+						}
+						return col;
+					});
+					setColumn(column);
+				})
+				.finally(() => {
+					setIsLoading(false);
+				});
+		}
 	}, []);
 
 	return (
@@ -48,7 +64,9 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 						<Breadcrumb.Item>
 							<a href="/">Dashboard</a>
 						</Breadcrumb.Item>
-						<Breadcrumb.Item>{localStorage.getItem('population')}</Breadcrumb.Item>
+						<Breadcrumb.Item>
+							{JSON.parse(localStorage.getItem('population')).CHVREP_POP_NAME}
+						</Breadcrumb.Item>
 					</Breadcrumb>
 				}
 				extra={[
@@ -61,6 +79,7 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 			<div className="px-6 pb-6">
 				<div className=" py-4">
 					<Table
+						rowKey={record => record.CHVSUMMARY_TAG}
 						columns={column}
 						dataSource={data}
 						scroll={{ x: 1200 }}

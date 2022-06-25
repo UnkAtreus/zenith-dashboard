@@ -1,26 +1,49 @@
 import React, { useEffect, useState } from 'react';
 
 import { Button, PageHeader, Breadcrumb, Table, Row, Statistic, Col } from 'antd';
+import dayjs from 'dayjs';
 
+import FctmeasoutService from '@/service/fctmeasout';
 import { GAPS_IN_CARE } from '@/store/table_column';
 import makeColumn from '@/utilities/makeColumn';
 
 function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 	const [data, setData] = useState([]);
+	const [column, setColumn] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const column = makeColumn(GAPS_IN_CARE);
 
 	useEffect(() => {
 		setIsLoading(true);
-		fetch(`https://627908956ac99a91066137ab.mockapi.io/GAPS_IN_CARE`)
-			.then(res => res.json())
-			.then(data => {
-				setData(data);
-			})
-			.finally(() => {
-				setIsLoading(false);
-			});
+		const popId = JSON.parse(localStorage.getItem('population')).DBLENTITY_ID;
+		if (popId) {
+			FctmeasoutService.list(popId, ratesummaryRecord.CHVMEASURE)
+				.then(({ data, columns }) => {
+					setData(data);
+					const column = columns.map(col => {
+						if (col.key === 'DBLENTITY_ID' || col.key === 'DBLREP_POP_ID' || col.key === 'CHVLOB') {
+							return {
+								...col,
+								className: 'hidden'
+							};
+						}
+						if (col.key === 'NUM1_DATE1' || col.key === 'IESD') {
+							return {
+								...col,
+								render: (text, record) => {
+									if (text) {
+										return <div>{dayjs(text).format('MMM DD,YYYY')}</div>;
+									}
+								}
+							};
+						}
+						return col;
+					});
+					setColumn(column);
+				})
+				.finally(() => {
+					setIsLoading(false);
+				});
+		}
 	}, []);
 
 	return (
@@ -40,7 +63,7 @@ function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 									setStep(0);
 								}}
 							>
-								{localStorage.getItem('population')}
+								{JSON.parse(localStorage.getItem('population')).CHVREP_POP_NAME}
 							</span>
 						</Breadcrumb.Item>
 						<Breadcrumb.Item>Member List</Breadcrumb.Item>
@@ -63,7 +86,8 @@ function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 					<Table
 						columns={column}
 						dataSource={data}
-						scroll={{ x: 1200 }}
+						scroll={{ x: 2400 }}
+						rowKey={record => record.CHVMEMNBR}
 						onRow={(record, rowIndex) => {
 							return {
 								onDoubleClick: event => {

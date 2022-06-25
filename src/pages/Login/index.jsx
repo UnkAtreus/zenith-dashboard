@@ -1,32 +1,51 @@
 import React, { useState, useEffect } from 'react';
 
 import { Form, Input, Button, message, Steps } from 'antd';
+import { getAuth } from 'firebase/auth';
+import { useSignInWithEmailAndPassword, useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/images/mihalik-group-logo.png';
+import firebaseApp from '@/service/firebase';
+import PopulationService from '@/service/population';
+
+const auth = getAuth(firebaseApp);
 
 function Login() {
 	// console.log(import.meta.env.VITE_USERNAME + ' ' + import.meta.env.VITE_PASSWORD);
+
+	const [signInWithEmailAndPassword, _user, _loading, error] = useSignInWithEmailAndPassword(auth);
+
 	const [step, setStep] = useState(0);
+	const [populations, setPopulations] = useState([]);
 	const navigate = useNavigate();
-	const onFinish = values => {
-		console.log('Success:', values);
-		if (values.username === import.meta.env.VITE_USERNAME && values.password === import.meta.env.VITE_PASSWORD) {
-			localStorage.setItem('token', 'TEST_TOKEN');
-			message.success('Login successful');
-			// navigate('/');
+	const onFinish = async values => {
+		await signInWithEmailAndPassword(values.email, values.password);
+	};
+
+	const getPopulation = async () => {
+		try {
+			const respond = await PopulationService.list();
+			console.log(respond.data);
+			setPopulations(respond.data);
 			setStep(1);
-		} else {
-			message.error('Username or password is incorrect');
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
 	useEffect(() => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			// setStep(1);
+		if (_user) {
+			message.success('Login successful');
+			getPopulation();
 		}
-	}, []);
+	}, [_user]);
+
+	useEffect(() => {
+		if (error) {
+			message.error('Username or password is incorrect');
+		}
+	}, [error]);
 
 	return (
 		<div className="min-h-screen bg-slate-50 p-16">
@@ -49,11 +68,11 @@ function Login() {
 								autoComplete="off"
 							>
 								<Form.Item
-									label="username"
-									name="username"
-									rules={[{ required: true, message: 'Please input your username!' }]}
+									label="email"
+									name="email"
+									rules={[{ required: true, message: 'Please input your email!' }]}
 								>
-									<Input />
+									<Input type="email" />
 								</Form.Item>
 
 								<Form.Item
@@ -65,7 +84,7 @@ function Login() {
 								</Form.Item>
 
 								<Form.Item>
-									<Button type="primary" htmlType="submit" block>
+									<Button type="primary" htmlType="submit" block loading={_loading}>
 										Login
 									</Button>
 								</Form.Item>
@@ -78,42 +97,18 @@ function Login() {
 						<div className="m-auto mt-16 max-w-lg rounded-lg bg-white p-6 shadow-lg">
 							<h1 className="mb-6 text-center text-2xl">Select Population</h1>
 							<div className="space-y-2">
-								<div
-									onClick={() => {
-										localStorage.setItem('population', 'Imperial Health Plan of California MAPD');
-										navigate('/');
-									}}
-									className="cursor-pointer rounded-lg border border-gray-200 px-6 py-4 transition-colors duration-200 hover:bg-gray-100"
-								>
-									Imperial Health Plan of California MAPD
-								</div>
-								<div
-									onClick={() => {
-										localStorage.setItem('population', 'Imperial Health Plan of California NSP');
-										navigate('/');
-									}}
-									className="cursor-pointer rounded-lg border border-gray-200 px-6 py-4 transition-colors duration-200 hover:bg-gray-100"
-								>
-									Imperial Health Plan of California NSP
-								</div>
-								<div
-									onClick={() => {
-										localStorage.setItem('population', 'Imperial Health Plan of Taxas MAPD');
-										navigate('/');
-									}}
-									className="cursor-pointer rounded-lg border border-gray-200 px-6 py-4 transition-colors duration-200 hover:bg-gray-100"
-								>
-									Imperial Health Plan of Taxas MAPD
-								</div>
-								<div
-									onClick={() => {
-										localStorage.setItem('population', 'Imperial Health Plan of Taxas CSNP');
-										navigate('/');
-									}}
-									className="cursor-pointer rounded-lg border border-gray-200 px-6 py-4 transition-colors duration-200 hover:bg-gray-100"
-								>
-									Imperial Health Plan of Taxas CSNP
-								</div>
+								{populations.map(population => (
+									<div
+										key={population.CHVREP_POP_NAME}
+										onClick={() => {
+											localStorage.setItem('population', JSON.stringify(population));
+											navigate('/');
+										}}
+										className="cursor-pointer rounded-lg border border-gray-200 px-6 py-4 transition-colors duration-200 hover:bg-gray-100"
+									>
+										{population.CHVREP_POP_NAME}
+									</div>
+								))}
 							</div>
 						</div>
 					</section>

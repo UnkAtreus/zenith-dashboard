@@ -3,10 +3,14 @@
         "baseUrl": "./",
         "jsx": "react",
         "paths": {
-           
-            
             "@/store/*": [
                 "./src/store/*"
+            ],
+            "@/atoms/*": [
+                "./src/atoms/*"
+            ],
+            "@/selectors/*": [
+                "./src/selectors/*"
             ],
             "@/assets/*": [
                 "./src/assets/*"
@@ -17,15 +21,15 @@
             "@/utilities/*": [
                 "./src/utilities/*"
             ],
+            "@/service/*": [
+                "./src/service/*"
+            ],
             "@/components/*": [
                 "./src/components/*"
             ],
             "@/pages/*": [
                 "./src/pages/*"
             ],
-            "@/src/*": [
-                "./src/*"
-            ]
         },
     },
     "include": [
