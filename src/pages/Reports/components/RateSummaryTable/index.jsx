@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Button, PageHeader, Breadcrumb, Table, Row, Statistic, Col } from 'antd';
+import { Excel } from 'antd-table-saveas-excel';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import RateSummaryService from '@/service/rateSummary';
@@ -15,6 +16,11 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 	const filter_meature = makeDropdown(MEASURE_ID);
 
 	const navigate = useNavigate();
+
+	const haldleExport = () => {
+		const excel = new Excel();
+		excel.addSheet('Rate Summary').addColumns(column).addDataSource(data).saveAs('Rate Summary.xlsx');
+	};
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -70,7 +76,13 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 					</Breadcrumb>
 				}
 				extra={[
-					<Button key="1" type="primary">
+					<Button
+						key="1"
+						type="primary"
+						onClick={() => {
+							haldleExport();
+						}}
+					>
 						Export
 					</Button>
 				]}
