@@ -16,7 +16,7 @@ export const axiosAuthInstance = axios.create({
 	baseURL: import.meta.env.VITE_API_ROUTE,
 	headers: {
 		'Content-Type': 'application/json',
-		'Access-Control-Allow-Private-Network': true
+		'Access-Control-Request-Private-Network': true
 	}
 });
 
