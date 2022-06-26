@@ -109,9 +109,9 @@ function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 						<Statistic title="Measure" value={ratesummaryRecord.CHVMEASURE} />
 					</Col>
 
-					<Divider type="vertical" className="h-auto" />
+					{/* <Divider type="vertical" className="h-auto" /> */}
 
-					<Col span={8}>
+					{/* <Col span={8}>
 						<Descriptions size="small" column={2}>
 							<Descriptions.Item label="Firstname">{memberListRecord.PROV_FIRST_NAME}</Descriptions.Item>
 							<Descriptions.Item label="Lastname">{memberListRecord.PROV_LAST_NAME}</Descriptions.Item>
@@ -120,7 +120,7 @@ function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 								{dayjs(memberListRecord.DOB).format('DD/MM/YYYY')}
 							</Descriptions.Item>
 						</Descriptions>
-					</Col>
+					</Col> */}
 				</Row>
 			</PageHeader>
 			<div className="px-6 pb-6">
