@@ -1653,6 +1653,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.41.tgz#fd90754150b57432b72bf560530500597ff04421"
   integrity sha512-rIAmXyJlqw4KEBO7+u9gxZZSQHaCNnIzYrnNmYVpgfJhxTqO0brCX0SYpqUTkVI5mwwUwzmtspLBGBKroMeynA==
 
+"@types/file-saver@^2.0.1":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@types/file-saver/-/file-saver-2.0.5.tgz#9ee342a5d1314bb0928375424a2f162f97c310c7"
+  integrity sha512-zv9kNf3keYegP5oThGLaPk8E081DFDuwfqjtiTzm6PoxChdJ1raSuADf2YGCVIyrSynLrgc8JWv296s7Q7pQSQ==
+
 "@types/geojson@*":
   version "7946.0.8"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.8.tgz#30744afdb385e2945e22f3b033f897f76b1f12ca"
@@ -1844,6 +1849,15 @@ ansicolors@~0.2.1:
   resolved "https://registry.yarnpkg.com/ansicolors/-/ansicolors-0.2.1.tgz#be089599097b74a5c9c4a84a0cdbcdb62bd87aef"
   integrity sha1-vgiVmQl7dKXJxKhKDNvNtivYeu8=
 
+antd-table-saveas-excel@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/antd-table-saveas-excel/-/antd-table-saveas-excel-2.2.1.tgz#1abc68a51e7b79ab83d6ba9e710a9d27d3102b5b"
+  integrity sha512-GH3Mbg4JXqdgOPi94UCFyutmtHfLiir2aXnhBF4b1L+D2NwGxfb3Lmpm7lpk9swSAZecn2n3/H7yvgJdWWkdOg==
+  dependencies:
+    "@types/file-saver" "^2.0.1"
+    better-xlsx "^0.7.5"
+    file-saver "^2.0.2"
+
 antd@^4.20.6:
   version "4.20.6"
   resolved "https://registry.yarnpkg.com/antd/-/antd-4.20.6.tgz#0d46a4b6128a717b4cad7ac6902311a0210f1d6f"
@@ -1997,6 +2011,15 @@ base-64@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/base-64/-/base-64-1.0.0.tgz#09d0f2084e32a3fd08c2475b973788eee6ae8f4a"
   integrity sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg==
+
+better-xlsx@^0.7.5:
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/better-xlsx/-/better-xlsx-0.7.6.tgz#dc9bdbc303ecdb74823f9582c608d9f6879f4b51"
+  integrity sha512-pdkaXyCupGdV7PMjVJ4gt0nN4qSSZbQlbWoyv7q5TLscDnERrJ8fra0kdC0wntKzds5LIsit16xX/7MXhYzlyQ==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    jszip "^3.2.2"
+    kind-of "^6.0.3"
 
 binary-extensions@^2.0.0:
   version "2.2.0"
@@ -3037,6 +3060,11 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
+file-saver@^2.0.2:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
+  integrity sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==
+
 fill-range@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-7.0.1.tgz#1919a6a7c75fe38b2c7c77e5198535da9acdda40"
@@ -3699,7 +3727,7 @@ json5@^2.2.1:
     array-includes "^3.1.4"
     object.assign "^4.1.2"
 
-jszip@^3.6.0:
+jszip@^3.2.2, jszip@^3.6.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.10.0.tgz#faf3db2b4b8515425e34effcdbb086750a346061"
   integrity sha512-LDfVtOLtOxb9RXkYOwPyNBTQDL4eUbqahtoY6x07GiDJHwSYvn8sHHIw8wINImV3MqbMNve2gSuM1DDqEKk09Q==
@@ -3720,6 +3748,11 @@ kind-of@^3.0.2:
   integrity sha1-MeohpzS6ubuw8yRm2JOupR5KPGQ=
   dependencies:
     is-buffer "^1.1.5"
+
+kind-of@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
+  integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
 klona@^2.0.4:
   version "2.0.5"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Button, PageHeader, Breadcrumb, Table, Row, Statistic, Col } from 'antd';
+import { Excel } from 'antd-table-saveas-excel';
 import dayjs from 'dayjs';
 
 import FctmeasoutService from '@/service/fctmeasout';
@@ -11,6 +12,11 @@ function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 	const [data, setData] = useState([]);
 	const [column, setColumn] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const haldleExport = () => {
+		const excel = new Excel();
+		excel.addSheet('MemberList').addColumns(column).addDataSource(data).saveAs('Member List.xlsx');
+	};
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -70,7 +76,7 @@ function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 					</Breadcrumb>
 				}
 				extra={[
-					<Button key="1" type="primary">
+					<Button onClick={() => haldleExport()} key="1" type="primary">
 						Export
 					</Button>
 				]}

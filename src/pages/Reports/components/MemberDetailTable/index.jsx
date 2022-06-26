@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Button, Divider, PageHeader, Breadcrumb, Table, Row, Statistic, Tabs, Descriptions, Col } from 'antd';
+import { Excel } from 'antd-table-saveas-excel';
 import dayjs from 'dayjs';
 
 import MemberDetailService from '@/service/memberDetail';
@@ -47,6 +48,11 @@ function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 		}
 	};
 
+	const haldleExport = () => {
+		const excel = new Excel();
+		excel.addSheet('Member Detail').addColumns(column).addDataSource(data).saveAs('Member Detail.xlsx');
+	};
+
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -85,7 +91,7 @@ function MemberDetailTable({ setStep, memberListRecord, ratesummaryRecord }) {
 					</Breadcrumb>
 				}
 				extra={[
-					<Button key="1" type="primary">
+					<Button onClick={() => haldleExport()} key="1" type="primary">
 						Export
 					</Button>
 				]}
