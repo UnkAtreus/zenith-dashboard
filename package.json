@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx,html}'",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx,html}'"
   },
+  "proxy": "http://127.0.0.1:8000",
   "dependencies": {
     "@ant-design/charts": "^1.3.6",
     "@ant-design/icons": "^4.7.0",
