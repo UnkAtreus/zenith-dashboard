@@ -2,7 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { Pie } from '@ant-design/charts';
 import { DownOutlined, TeamOutlined } from '@ant-design/icons';
-import { Layout, Menu, Divider, Dropdown, Space, Button } from 'antd';
+import { Layout, Menu, Divider, Dropdown, Space, Button, Row, Col, Statistic } from 'antd';
+import dayjs from 'dayjs';
 import { signOut } from 'firebase/auth';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -197,56 +198,76 @@ function Home() {
 						</div>
 					</section>
 					<section>
-						<div className="flex space-x-6">
-							<div className="h-[28rem] w-full max-w-xs rounded-2xl bg-white px-6 py-10 shadow-lg">
-								<div className="mb-4 text-xl font-medium">Project List</div>
-								<div className="h-80 space-y-2 overflow-auto">
-									{Array(8)
-										.fill(0)
-										.map((_, index) => (
-											<div key={`projecy-card__` + index}>
-												<div className="flex items-center space-x-3">
-													<TeamOutlined style={{ fontSize: `32px` }} />
+						<Row gutter={[24, 24]}>
+							<Col span={8}>
+								<div className="w-full  rounded-2xl bg-white px-6 py-10 shadow-lg">
+									<Statistic title="Number of measure" value={150} />
+								</div>
+							</Col>
+							<Col span={8}>
+								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+									<Statistic
+										title="Last Update"
+										value={new Date().toLocaleString()}
+										formatter={value => {
+											return dayjs(value).format('MM/DD/YYYY');
+										}}
+									/>
+								</div>
+							</Col>
+							<Col span={8}>
+								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+									<Statistic title="Total Population" value={22} />
+								</div>
+							</Col>
 
-													<div className="overflow-hidden">
-														<div className="overflow-hidden text-ellipsis whitespace-nowrap">
-															ZENITHRUN - MAY2021
+							<Col span={12}>
+								<div className="h-[28rem] w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+									<div className="mb-4 text-xl font-medium">Project List</div>
+									<div className="h-80 space-y-2 overflow-auto">
+										{Array(8)
+											.fill(0)
+											.map((_, index) => (
+												<div key={`project-card__` + index}>
+													<div className="flex cursor-pointer items-center space-x-3 ">
+														<TeamOutlined style={{ fontSize: `32px` }} />
+
+														<div className="overflow-hidden">
+															<div className="overflow-hidden text-ellipsis whitespace-nowrap">
+																ZENITHRUN - MAY2021
+															</div>
+															<div className="text-gray-400">
+																Last updated: 04/06/2022
+															</div>
 														</div>
-														<div className="text-gray-400">Last updated: 04/06/2022</div>
 													</div>
+													<Divider />
 												</div>
-												<Divider />
-											</div>
-										))}
-								</div>
-							</div>
-							<div className="h-min w-full flex-1 rounded-2xl bg-white px-6 py-10 shadow-lg">
-								<div className="mb-4 text-xl font-medium">Cumulative Gap Opportunities</div>
-								<Pie {...config} />
-							</div>
-
-							<div className="h-fit w-full max-w-xs rounded-2xl bg-white px-6 py-10 shadow-lg">
-								<div className="text-xl font-medium">Navigational Items</div>
-								<div className="mb-4 text-xs font-medium">{populations.populationName}</div>
-								<div className="space-y-4">
-									<div
-										onClick={() => navigate('/reports')}
-										className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80"
-									>
-										Rate Sheet by Population
-									</div>
-									<div className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80">
-										Rate Sheet by Provider
-									</div>
-									<div className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80">
-										Gaps in Care
-									</div>
-									<div className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-purple-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80">
-										Goal Tracker
+											))}
 									</div>
 								</div>
-							</div>
-						</div>
+							</Col>
+							<Col span={12}>
+								<div className="h-fit w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+									<div className="text-xl font-medium">Navigational Items</div>
+									<div className="mb-4 text-xs font-medium">{populations.populationName}</div>
+									<div className="space-y-4">
+										<div
+											onClick={() => navigate('/reports')}
+											className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80"
+										>
+											Rate Sheet by Population
+										</div>
+										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium grayscale transition-all duration-200 hover:bg-opacity-80">
+											Rate Sheet by Provider
+										</div>
+										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium grayscale transition-all duration-200 hover:bg-opacity-80">
+											Gaps in Care
+										</div>
+									</div>
+								</div>
+							</Col>
+						</Row>
 					</section>
 				</div>
 			</Layout.Content>

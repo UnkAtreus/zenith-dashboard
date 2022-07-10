@@ -31,13 +31,13 @@ export const MENUITEMS = [
 			</Link>
 		],
 		key: 'goal-tracker'
-	},
-	{
-		label: [
-			<Link to="/" key="gaps-in-care">
-				Gaps in Care
-			</Link>
-		],
-		key: 'gaps-in-care'
 	}
+	// {
+	// 	label: [
+	// 		<Link to="/" key="gaps-in-care">
+	// 			Gaps in Care
+	// 		</Link>
+	// 	],
+	// 	key: 'gaps-in-care'
+	// }
 ];
