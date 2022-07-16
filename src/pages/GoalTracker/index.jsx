@@ -208,7 +208,7 @@ function GoalTracker() {
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+								<div className="h-full w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Recent Update</div>
 									<div className=" space-y-2 overflow-auto">
 										{Array(3)
@@ -240,16 +240,10 @@ function GoalTracker() {
 								</div>
 							</Col>
 
-							<Col span={12}>
+							<Col span={24}>
 								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Rate (Lowest 8)</div>
 									<Pie {...configPie} />
-								</div>
-							</Col>
-							<Col span={12}>
-								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
-									<div className="mb-4 text-xl font-medium">Goal Tracker</div>
-									<Line {...configLine} />
 								</div>
 							</Col>
 						</Row>
