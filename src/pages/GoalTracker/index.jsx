@@ -184,31 +184,31 @@ function GoalTracker() {
 					<section>
 						<Row gutter={[24, 24]}>
 							<Col span={6}>
-								<div className="w-full  rounded-2xl bg-white p-6 shadow-lg">
+								<div className="w-full  rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
 									<Statistic title="Total Population" value={684} />
 									<Progress autoFit={false} height={24} color={'#384ad7'} percent={1} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="w-full rounded-2xl bg-white p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
 									<Statistic title="Male Population" value={445} />
 									<Progress autoFit={false} height={24} color={'#384ad7'} percent={0.65} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="w-full rounded-2xl bg-white p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
 									<Statistic title="Female Population" value={171} />
 									<Progress autoFit={false} height={24} color={'#384ad7'} percent={0.25} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="w-full rounded-2xl bg-white p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
 									<Statistic title="Special Population" value={68} />
 									<Progress autoFit={false} height={24} color={'#384ad7'} percent={0.1} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="h-full w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+								<div className="h-full w-full rounded-2xl bg-[#D3E4CD] px-6 py-10 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Recent Update</div>
 									<div className=" space-y-2 overflow-auto">
 										{Array(3)
@@ -234,14 +234,14 @@ function GoalTracker() {
 								</div>
 							</Col>
 							<Col span={18}>
-								<div className="w-full rounded-2xl bg-white p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-[#D3E4CD] p-6 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Total Population</div>
 									<Column {...config} />
 								</div>
 							</Col>
 
 							<Col span={24}>
-								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+								<div className="w-full rounded-2xl bg-[#FEF5ED] px-6 py-10 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Rate (Lowest 8)</div>
 									<Pie {...configPie} />
 								</div>

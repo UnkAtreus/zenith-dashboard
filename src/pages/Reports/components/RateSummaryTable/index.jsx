@@ -88,8 +88,8 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 				]}
 			/>
 
-			<div className="px-6 pb-6">
-				<div className=" py-4">
+			<div className="px-6 pb-6 ">
+				<div className=" py-4 bg-white">
 					<Table
 						rowKey={record => record.CHVSUMMARY_TAG}
 						columns={column}
