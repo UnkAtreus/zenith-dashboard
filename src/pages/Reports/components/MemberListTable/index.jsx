@@ -35,6 +35,7 @@ function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 						if (col.key === 'NUM1_DATE1' || col.key === 'IESD') {
 							return {
 								...col,
+								className: 'member-list-table-column',
 								render: (text, record) => {
 									if (text) {
 										return <div>{dayjs(text).format('MMM DD,YYYY')}</div>;
@@ -42,7 +43,10 @@ function MemberListTable({ setStep, ratesummaryRecord, setMemberListRecord }) {
 								}
 							};
 						}
-						return col;
+						return {
+							...col,
+							className: 'member-list-table-column'
+						};
 					});
 					setColumn(column);
 				})
