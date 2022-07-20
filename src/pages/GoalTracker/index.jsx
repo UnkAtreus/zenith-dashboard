@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Column, Heatmap, Area, Progress, Pie, Line } from '@ant-design/charts';
+import { Column, Heatmap, Area, Progress, Pie, Line, G2 } from '@ant-design/charts';
 import { TeamOutlined } from '@ant-design/icons';
 import { Layout, Menu, PageHeader, Breadcrumb, Row, Col, Statistic, Divider } from 'antd';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,23 @@ function GoalTracker() {
 	const [dataHeatmap, setDataHeatmap] = useState([]);
 	const [dataAres, setDataAtea] = useState([]);
 	const [dataLine, setDataLine] = useState([]);
+
+	const { registerTheme } = G2;
+
+	registerTheme('custom-theme', {
+		colors10: [
+			'#fca5a5',
+			'#fdba74',
+			'#86efac',
+			'#5eead4',
+			'#7dd3fc',
+			'#a5b4fc',
+			'#d8b4fe',
+			'#fbcfe8',
+			'#f9a8d4',
+			'#fda4af'
+		]
+	});
 
 	const asyncFetch = () => {
 		fetch('https://gw.alipayobjects.com/os/bmw-prod/360c3eae-0c73-46f0-a982-4746a6095010.json')
@@ -130,7 +147,12 @@ function GoalTracker() {
 			{
 				type: 'element-active'
 			}
-		]
+		],
+		theme: 'custom-theme'
+		// pieStyle: (test, i) => {
+		// 	console.log(test, i);
+		// 	return { fill: 'l(225) 0:#ddd6fe 0.5:#c4b5fd 1:#a78bfa' };
+		// }
 	};
 
 	const config = {
@@ -157,6 +179,10 @@ function GoalTracker() {
 			sales: {
 				alias: 'number'
 			}
+		},
+		color: '#a78bfa',
+		columnStyle: {
+			fill: 'l(225) 0:#ddd6fe 0.5:#c4b5fd 1:#a78bfa'
 		}
 	};
 	return (
@@ -181,34 +207,34 @@ function GoalTracker() {
 			</Layout.Header>
 			<Layout.Content className="h-full min-h-screen bg-slate-50 pt-16">
 				<div className="m-auto my-6 max-w-screen-xl">
-					<section>
+					<section id="goalTracker-content">
 						<Row gutter={[24, 24]}>
 							<Col span={6}>
-								<div className="w-full  rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
+								<div className="w-full  rounded-2xl bg-gradient-to-br from-rose-400 to-rose-200 p-6 shadow-lg">
 									<Statistic title="Total Population" value={684} />
-									<Progress autoFit={false} height={24} color={'#384ad7'} percent={1} />
+									<Progress autoFit={false} height={24} color={['#e11d48', 'white']} percent={1} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="w-full rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-gradient-to-br from-indigo-400 to-indigo-200 p-6 shadow-lg">
 									<Statistic title="Male Population" value={445} />
-									<Progress autoFit={false} height={24} color={'#384ad7'} percent={0.65} />
+									<Progress autoFit={false} height={24} color={['#4f46e5', 'white']} percent={0.65} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="w-full rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-200 p-6 shadow-lg">
 									<Statistic title="Female Population" value={171} />
-									<Progress autoFit={false} height={24} color={'#384ad7'} percent={0.25} />
+									<Progress autoFit={false} height={24} color={['#059669', 'white']} percent={0.25} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="w-full rounded-2xl bg-[#ADC2A9] p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-gradient-to-br from-orange-400 to-orange-200 p-6 shadow-lg">
 									<Statistic title="Special Population" value={68} />
-									<Progress autoFit={false} height={24} color={'#384ad7'} percent={0.1} />
+									<Progress autoFit={false} height={24} color={['#ea580c', 'white']} percent={0.1} />
 								</div>
 							</Col>
 							<Col span={6}>
-								<div className="h-full w-full rounded-2xl bg-[#D3E4CD] px-6 py-10 shadow-lg">
+								<div className="h-full w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Recent Update</div>
 									<div className=" space-y-2 overflow-auto">
 										{Array(3)
@@ -234,14 +260,14 @@ function GoalTracker() {
 								</div>
 							</Col>
 							<Col span={18}>
-								<div className="w-full rounded-2xl bg-[#D3E4CD] p-6 shadow-lg">
+								<div className="w-full rounded-2xl bg-white p-6 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Total Population</div>
 									<Column {...config} />
 								</div>
 							</Col>
 
 							<Col span={24}>
-								<div className="w-full rounded-2xl bg-[#FEF5ED] px-6 py-10 shadow-lg">
+								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Rate (Lowest 8)</div>
 									<Pie {...configPie} />
 								</div>

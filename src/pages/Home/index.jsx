@@ -116,7 +116,7 @@ function Home() {
 	}
 	return (
 		<Layout>
-			<Layout.Header className="fixed z-10 flex w-full items-center bg-[white] shadow">
+			<Layout.Header className="fixed z-10 flex w-full items-center bg-white shadow">
 				<div className="flex flex-1 items-center justify-between">
 					<div className="flex items-center space-x-4">
 						<div className="relative flex h-14 w-14">
@@ -134,7 +134,7 @@ function Home() {
 					</div>
 				</div>
 			</Layout.Header>
-			<Layout.Content className="h-full min-h-screen bg-[#ECF2F9] pt-16">
+			<Layout.Content className="h-full min-h-screen bg-slate-50 pt-16">
 				<div className="m-auto mt-6 max-w-screen-xl space-y-6">
 					{/* <section className="Card">
 						<div className=" flex overflow-hidden rounded-2xl bg-white p-6 shadow-lg">
@@ -151,8 +151,8 @@ function Home() {
 						</div>
 					</section> */}
 					<section>
-						<div className="flex w-full justify-between rounded-2xl bg-[#F7FBFC] px-6 py-6 shadow">
-							<h1 className="mb-0 text-xl">{populations.populationName}</h1>
+						<div className="flex w-full justify-between rounded-2xl bg-gradient-to-r from-indigo-400 to-violet-300 px-6 py-6 shadow">
+							<h1 className="mb-0 text-xl text-white">{populations.populationName}</h1>
 							<div className="flex items-center space-x-4">
 								<Dropdown
 									overlay={
@@ -197,15 +197,15 @@ function Home() {
 							</div>
 						</div>
 					</section>
-					<section>
+					<section id="dashboard-content">
 						<Row gutter={[24, 24]}>
 							<Col span={8}>
-								<div className="w-full  rounded-2xl bg-[#B9D7EA] px-6 py-10 shadow-lg">
+								<div className="w-full  rounded-2xl bg-gradient-to-br from-orange-400 to-orange-200 px-6 py-10 shadow-lg">
 									<Statistic title="Number of Measures" value={175} />
 								</div>
 							</Col>
 							<Col span={8}>
-								<div className="w-full rounded-2xl bg-[#B9D7EA] px-6 py-10 shadow-lg">
+								<div className="w-full rounded-2xl bg-gradient-to-br from-green-400 to-green-200 px-6 py-10 shadow-lg">
 									<Statistic
 										title="Last Update"
 										value={new Date().toLocaleString()}
@@ -216,13 +216,13 @@ function Home() {
 								</div>
 							</Col>
 							<Col span={8}>
-								<div className="w-full rounded-2xl bg-[#B9D7EA] px-6 py-10 shadow-lg">
+								<div className="w-full rounded-2xl bg-gradient-to-br from-rose-400 to-rose-200 px-6 py-10 shadow-lg">
 									<Statistic title="Total Population" value={122} />
 								</div>
 							</Col>
 
 							<Col span={12}>
-								<div className="h-[28rem] w-full rounded-2xl bg-[#D6E6F2] px-6 py-10 shadow-lg">
+								<div className="h-[28rem] w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
 									<div className="mb-4 text-xl font-medium">Project List</div>
 									<div className="h-80 space-y-2 overflow-auto">
 										{Array(8)
@@ -248,20 +248,20 @@ function Home() {
 								</div>
 							</Col>
 							<Col span={12}>
-								<div className="h-fit w-full rounded-2xl bg-[#D6E6F2] px-6 py-10 shadow-lg">
+								<div className="h-fit w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
 									<div className="text-xl font-medium">Navigational Items</div>
 									<div className="mb-4 text-xs font-medium">{populations.populationName}</div>
 									<div className="space-y-4">
 										<div
 											onClick={() => navigate('/reports')}
-											className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-[#769FCD] p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80"
+											className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-gradient-to-r from-indigo-300 to-indigo-200 p-4  text-sm font-medium text-white transition-all duration-200 hover:bg-opacity-80"
 										>
 											Rate Sheet by Population
 										</div>
-										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium grayscale transition-all duration-200 hover:bg-opacity-80">
+										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-gradient-to-r from-indigo-300 to-indigo-200 p-4 text-sm font-medium text-white grayscale transition-all duration-200 hover:bg-opacity-80">
 											Rate Sheet by Provider
 										</div>
-										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium grayscale transition-all duration-200 hover:bg-opacity-80">
+										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-gradient-to-r from-indigo-300 to-indigo-200 p-4 text-sm font-medium text-white grayscale transition-all duration-200 hover:bg-opacity-80">
 											Gaps in Care
 										</div>
 									</div>

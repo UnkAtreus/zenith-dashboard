@@ -11,9 +11,19 @@ body {
 } */
 
 .ant-table-thead tr .ant-table-cell.rate-summary-table-column {
-	background-color: #9cb3cc !important;
+	background-color: #e0e7ff !important;
 }
 
 .ant-table-thead tr .ant-table-cell.member-list-table-column {
-	background-color: #c3dfaa !important;
+	background-color: #d1fae5 !important;
+}
+
+#dashboard-content * .ant-statistic-title,
+#dashboard-content * .ant-statistic-content {
+	color: white !important;
+}
+
+#goalTracker-content * .ant-statistic-title,
+#goalTracker-content * .ant-statistic-content {
+	color: white !important;
 }
