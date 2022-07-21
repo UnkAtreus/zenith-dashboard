@@ -151,8 +151,8 @@ function Home() {
 						</div>
 					</section> */}
 					<section>
-						<div className="flex w-full justify-between rounded-2xl bg-white px-6 py-6 shadow">
-							<h1 className="mb-0 text-xl">{populations.populationName}</h1>
+						<div className="flex w-full justify-between rounded-2xl bg-gradient-to-r from-indigo-400 to-violet-300 px-6 py-6 shadow">
+							<h1 className="mb-0 text-xl text-white">{populations.populationName}</h1>
 							<div className="flex items-center space-x-4">
 								<Dropdown
 									overlay={
@@ -197,15 +197,15 @@ function Home() {
 							</div>
 						</div>
 					</section>
-					<section>
+					<section id="dashboard-content">
 						<Row gutter={[24, 24]}>
 							<Col span={8}>
-								<div className="w-full  rounded-2xl bg-white px-6 py-10 shadow-lg">
-									<Statistic title="Number of measure" value={150} />
+								<div className="w-full  rounded-2xl bg-gradient-to-br from-orange-400 to-orange-200 px-6 py-10 shadow-lg">
+									<Statistic title="Number of Measures" value={175} />
 								</div>
 							</Col>
 							<Col span={8}>
-								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
+								<div className="w-full rounded-2xl bg-gradient-to-br from-green-400 to-green-200 px-6 py-10 shadow-lg">
 									<Statistic
 										title="Last Update"
 										value={new Date().toLocaleString()}
@@ -216,8 +216,8 @@ function Home() {
 								</div>
 							</Col>
 							<Col span={8}>
-								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
-									<Statistic title="Total Population" value={22} />
+								<div className="w-full rounded-2xl bg-gradient-to-br from-rose-400 to-rose-200 px-6 py-10 shadow-lg">
+									<Statistic title="Total Population" value={122} />
 								</div>
 							</Col>
 
@@ -254,14 +254,14 @@ function Home() {
 									<div className="space-y-4">
 										<div
 											onClick={() => navigate('/reports')}
-											className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium transition-all duration-200 hover:bg-opacity-80"
+											className="w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-gradient-to-r from-indigo-300 to-indigo-200 p-4  text-sm font-medium text-white transition-all duration-200 hover:bg-opacity-80"
 										>
 											Rate Sheet by Population
 										</div>
-										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium grayscale transition-all duration-200 hover:bg-opacity-80">
+										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-gradient-to-r from-indigo-300 to-indigo-200 p-4 text-sm font-medium text-white grayscale transition-all duration-200 hover:bg-opacity-80">
 											Rate Sheet by Provider
 										</div>
-										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-indigo-200 p-4 text-sm font-medium grayscale transition-all duration-200 hover:bg-opacity-80">
+										<div className="w-full cursor-not-allowed overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-gradient-to-r from-indigo-300 to-indigo-200 p-4 text-sm font-medium text-white grayscale transition-all duration-200 hover:bg-opacity-80">
 											Gaps in Care
 										</div>
 									</div>

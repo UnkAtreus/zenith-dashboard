@@ -38,10 +38,10 @@
   dependencies:
     "@ctrl/tinycolor" "^3.4.0"
 
-"@ant-design/flowchart@^1.0.2":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@ant-design/flowchart/-/flowchart-1.1.1.tgz"
-  integrity sha512-HWffkv2ESc85LRNpQnS5vk7cc1R8nq/Oa5M0y6nmWrUZu0fmohYw6maBS+ODRaz271Vq00F5qIe+xJ/1n9oPiQ==
+"@ant-design/flowchart@^1.0.2", "@ant-design/flowchart@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/@ant-design/flowchart/-/flowchart-1.1.2.tgz"
+  integrity sha512-Q2Jt2QEE+CBD0PjCetzXtel3auYNiHAfLgnC0yvFuXHcPzUnC3WFGU7wuSEezKMMmOPXLZU4uhclx8olrz9nqg==
   dependencies:
     "@antv/layout" "^0.1.17"
     "@antv/x6" "^1.25.0"
@@ -1643,7 +1643,7 @@
 
 "@types/file-saver@^2.0.1":
   version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@types/file-saver/-/file-saver-2.0.5.tgz#9ee342a5d1314bb0928375424a2f162f97c310c7"
+  resolved "https://registry.npmjs.org/@types/file-saver/-/file-saver-2.0.5.tgz"
   integrity sha512-zv9kNf3keYegP5oThGLaPk8E081DFDuwfqjtiTzm6PoxChdJ1raSuADf2YGCVIyrSynLrgc8JWv296s7Q7pQSQ==
 
 "@types/geojson@*":
@@ -1839,7 +1839,7 @@ ansicolors@~0.2.1:
 
 antd-table-saveas-excel@^2.2.1:
   version "2.2.1"
-  resolved "https://registry.yarnpkg.com/antd-table-saveas-excel/-/antd-table-saveas-excel-2.2.1.tgz#1abc68a51e7b79ab83d6ba9e710a9d27d3102b5b"
+  resolved "https://registry.npmjs.org/antd-table-saveas-excel/-/antd-table-saveas-excel-2.2.1.tgz"
   integrity sha512-GH3Mbg4JXqdgOPi94UCFyutmtHfLiir2aXnhBF4b1L+D2NwGxfb3Lmpm7lpk9swSAZecn2n3/H7yvgJdWWkdOg==
   dependencies:
     "@types/file-saver" "^2.0.1"
@@ -1997,7 +1997,7 @@ base-64@^1.0.0:
 
 better-xlsx@^0.7.5:
   version "0.7.6"
-  resolved "https://registry.yarnpkg.com/better-xlsx/-/better-xlsx-0.7.6.tgz#dc9bdbc303ecdb74823f9582c608d9f6879f4b51"
+  resolved "https://registry.npmjs.org/better-xlsx/-/better-xlsx-0.7.6.tgz"
   integrity sha512-pdkaXyCupGdV7PMjVJ4gt0nN4qSSZbQlbWoyv7q5TLscDnERrJ8fra0kdC0wntKzds5LIsit16xX/7MXhYzlyQ==
   dependencies:
     "@babel/runtime" "^7.8.4"
@@ -3014,7 +3014,7 @@ file-entry-cache@^6.0.1:
 
 file-saver@^2.0.2:
   version "2.0.5"
-  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
+  resolved "https://registry.npmjs.org/file-saver/-/file-saver-2.0.5.tgz"
   integrity sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==
 
 fill-range@^7.0.1:
@@ -3684,7 +3684,7 @@ kind-of@^3.0.2:
 
 kind-of@^6.0.3:
   version "6.0.3"
-  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
+  resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.3.tgz"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
 klona@^2.0.4:

@@ -33,6 +33,7 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 						if (col.key === 'CHVMEASURE') {
 							return {
 								...col,
+								className: 'rate-summary-table-column',
 								filters: filter_meature,
 								filterMode: 'tree',
 								filterSearch: true,
@@ -50,7 +51,10 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 								className: 'hidden'
 							};
 						}
-						return col;
+						return {
+							...col,
+							className: 'rate-summary-table-column'
+						};
 					});
 					setColumn(column);
 				})
@@ -88,8 +92,8 @@ function RateSummaryTable({ setStep, setRateSummaryRecord }) {
 				]}
 			/>
 
-			<div className="px-6 pb-6">
-				<div className=" py-4">
+			<div className="px-6 pb-6 ">
+				<div className=" bg-white py-4">
 					<Table
 						rowKey={record => record.CHVSUMMARY_TAG}
 						columns={column}
