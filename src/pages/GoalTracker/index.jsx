@@ -88,6 +88,128 @@ function GoalTracker() {
 			sales: 38
 		}
 	];
+	const dataWithLine = [
+		{
+			type: 'ABC',
+			sales: 12,
+			month: 'Jan'
+		},
+		{
+			type: 'ACB',
+			sales: 23,
+			month: 'Jan'
+		},
+		{
+			type: 'CAB',
+			sales: 32,
+			month: 'Jan'
+		},
+		{
+			type: 'CBA',
+			sales: 32,
+			month: 'Jan'
+		},
+		{
+			type: 'BAC',
+			sales: 12,
+			month: 'Jan'
+		},
+		{
+			type: 'BCA',
+			sales: 21,
+			month: 'Jan'
+		},
+		{
+			type: 'DBA',
+			sales: 14,
+			month: 'Jan'
+		},
+		{
+			type: 'BDA',
+			sales: 12,
+			month: 'Jan'
+		},
+		{
+			type: 'ABC',
+			sales: 54,
+			month: 'Feb'
+		},
+		{
+			type: 'ACB',
+			sales: 14,
+			month: 'Feb'
+		},
+		{
+			type: 'CAB',
+			sales: 65,
+			month: 'Feb'
+		},
+		{
+			type: 'CBA',
+			sales: 123,
+			month: 'Feb'
+		},
+		{
+			type: 'BAC',
+			sales: 67,
+			month: 'Feb'
+		},
+		{
+			type: 'BCA',
+			sales: 26,
+			month: 'Feb'
+		},
+		{
+			type: 'DBA',
+			sales: 86,
+			month: 'Feb'
+		},
+		{
+			type: 'BDA',
+			sales: 46,
+			month: 'Feb'
+		},
+		{
+			type: 'ABC',
+			sales: 45,
+			month: 'Mar'
+		},
+		{
+			type: 'ACB',
+			sales: 52,
+			month: 'Mar'
+		},
+		{
+			type: 'CAB',
+			sales: 53,
+			month: 'Mar'
+		},
+		{
+			type: 'CBA',
+			sales: 150,
+			month: 'Mar'
+		},
+		{
+			type: 'BAC',
+			sales: 80,
+			month: 'Mar'
+		},
+		{
+			type: 'BCA',
+			sales: 56,
+			month: 'Mar'
+		},
+		{
+			type: 'DBA',
+			sales: 46,
+			month: 'Mar'
+		},
+		{
+			type: 'BDA',
+			sales: 60,
+			month: 'Mar'
+		}
+	];
 
 	const configAreaData = {
 		height: 500,
@@ -114,12 +236,12 @@ function GoalTracker() {
 		}
 	};
 	const configLine = {
-		data: dataLine,
-		xField: 'year',
-		yField: 'value',
-		seriesField: 'category',
+		data: dataWithLine,
+		xField: 'month',
+		yField: 'sales',
+		seriesField: 'type',
 		xAxis: {
-			type: 'time'
+			type: 'cat'
 		},
 		yAxis: {
 			label: {
@@ -155,6 +277,29 @@ function GoalTracker() {
 		// }
 	};
 
+	const configColumn = {
+		data: dataWithLine,
+		isGroup: true,
+		xField: 'type',
+		yField: 'sales',
+		seriesField: 'month',
+		label: {
+			position: 'middle',
+
+			layout: [
+				{
+					type: 'interval-adjust-position'
+				},
+				{
+					type: 'interval-hide-overlap'
+				},
+				{
+					type: 'adjust-color'
+				}
+			]
+		}
+	};
+
 	const config = {
 		data,
 		xField: 'type',
@@ -182,7 +327,7 @@ function GoalTracker() {
 		},
 		color: '#a78bfa',
 		columnStyle: {
-			fill: 'l(225) 0:#ddd6fe 0.5:#c4b5fd 1:#a78bfa'
+			fill: 'l(225) 0:#ddd6fe 0.5:#47B5FF 1:#4f46e5'
 		}
 	};
 	return (
@@ -268,8 +413,9 @@ function GoalTracker() {
 
 							<Col span={24}>
 								<div className="w-full rounded-2xl bg-white px-6 py-10 shadow-lg">
-									<div className="mb-4 text-xl font-medium">Rate (Lowest 8)</div>
-									<Pie {...configPie} />
+									<div className="mb-4 text-xl font-medium">Rate</div>
+									{/* <Line {...configLine} /> */}
+									<Column {...configColumn} />
 								</div>
 							</Col>
 						</Row>
